@@ -1,0 +1,28 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Release PR or publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # release PR commit, git tag, GitHub Release
+      pull-requests: write # create/update the single release PR
+    steps:
+      # No open release PR -> creates/updates the one and only "chore(main): release X.Y.Z" PR
+      #   (version bump in package.json, CHANGELOG.md, notes from conventional commits).
+      # Release PR merged -> tags vN.N.N and creates the GitHub Release with those notes.
+      - uses: googleapis/release-please-action@v4
+        with:
+          manifest-config: release-please-config.json
+          manifest-file: .release-please-manifest.json
