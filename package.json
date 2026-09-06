@@ -1,0 +1,16 @@
+{
+  "name": "skills",
+  "version": "0.0.0",
+  "private": true,
+  "description": "",
+  "homepage": "https://github.com/seropaski/skills#readme",
+  "bugs": {
+    "url": "https://github.com/seropaski/skills/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seropaski/skills.git"
+  },
+  "license": "MIT",
+  "author": "Sergei Vysotskii"
+}
