@@ -1,6 +1,6 @@
 ---
 name: skill-matrix
-description: Service skill — loaded by the plan and implement skills; not invoked by the user. Maps the task's capability areas to domain skills actually installed in the current environment. Names no concrete skills: every engineer's machine carries a different set.
+description: Service skill — loaded by the plan and implement skills; not invoked by the user. Maps the task's capability areas to domain skills actually installed in the current environment. Names no concrete skills, because every engineer's machine carries a different set.
 ---
 
 # skill-matrix

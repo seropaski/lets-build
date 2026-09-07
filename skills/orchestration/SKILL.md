@@ -1,6 +1,6 @@
 ---
 name: orchestration
-description: Service skill — loaded by the implement and review skills; not invoked by the user. The subagent protocol: three separated roles, self-contained dispatch prompts, the validate and review cycle, rework limits, and what the orchestrator must never do itself.
+description: Service skill — loaded by the implement and review skills; not invoked by the user. The subagent protocol (three separated roles, self-contained dispatch prompts, the validate and review cycle, rework limits, and what the orchestrator must never do itself).
 ---
 
 # orchestration
