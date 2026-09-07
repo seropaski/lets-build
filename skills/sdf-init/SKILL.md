@@ -1,5 +1,5 @@
 ---
-name: init
+name: sdf-init
 description: Set up a repository for the agent development workflow — detect the stack, create AGENTS.md and the docs knowledge tree (glossary, ADR, RFC, conventions, plans), and record project conventions. Run once per project; re-run to refresh after major stack changes.
 ---
 
@@ -17,11 +17,11 @@ Evidence only — what files prove, no guessing: package.json, tsconfig.json, ne
 
 ## 2. Create the tree
 
-Per the `doc-standards` skill: docs/glossary, docs/architecture/{adr,rfcs}, docs/conventions, docs/plans/{active,completed}. Create what is missing, keep what exists.
+Per the `sdf-doc-standards` skill: docs/glossary, docs/architecture/{adr,rfcs}, docs/conventions, docs/plans/{active,completed}. Create what is missing, keep what exists.
 
 ## 3. Seed
 
-Glossary: 3–5 real domain terms harvested from routes, models, UI section names — one entry per term in the doc-standards format; the human extends. Conventions stubs only where the repo already shows the rules.
+Glossary: 3–5 real domain terms harvested from routes, models, UI section names — one entry per term in the sdf-doc-standards format; the human extends. Conventions stubs only where the repo already shows the rules.
 
 ## 4. Write AGENTS.md
 

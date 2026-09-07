@@ -6,7 +6,7 @@ Files to touch; dispatch order — tasks parallelized as far as disjoint file se
 
 ## Dispatch — implementer
 
-One plan task per dispatch; a task too big to review in one diff gets split into closed parts. Prompt per the `orchestration` skill's dispatch template: scope verbatim (What / Where / Why with R# / UC# / DEC# trace), context, conventions, skills, protocol, bans, report format.
+One plan task per dispatch; a task too big to review in one diff gets split into closed parts. Prompt per the `sdf-orchestration` skill's dispatch template: scope verbatim (What / Where / Why with R# / UC# / DEC# trace), context, conventions, skills, protocol, bans, report format.
 
 ## Validate — after every implementer dispatch
 

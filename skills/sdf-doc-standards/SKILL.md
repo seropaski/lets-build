@@ -1,6 +1,6 @@
 ---
-name: doc-standards
-description: Service skill — loaded by the init, plan, implement, and review skills; not invoked by the user. The project knowledge tree, the source-of-truth map (which document answers which question), linking rules, glossary format, and document maintenance.
+name: sdf-doc-standards
+description: Service skill — loaded by the sdf-init, sdf-plan, sdf-implement, and sdf-review skills; not invoked by the user. The project knowledge tree, the source-of-truth map (which document answers which question), linking rules, glossary format, and document maintenance.
 ---
 
 # doc-standards
@@ -9,7 +9,7 @@ Documentation here is a knowledge graph, not a folder of files. Every document a
 
 ## The tree
 
-Created by init, governed here:
+Created by sdf-init, governed here:
 
     AGENTS.md                       how the agent works in this repo
     docs/

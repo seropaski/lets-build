@@ -1,5 +1,5 @@
 ---
-name: ship
+name: sdf-ship
 description: Commit the current changes and open a merge request — conventional message, secrets check, push, then MR via GitLab push options or PR via gh on GitHub, auto-detected from the origin remote. Use to close out a task or checkpoint work. Say "commit only" to skip push and MR.
 ---
 
@@ -63,4 +63,4 @@ Take the MR/PR URL from the command output and show it. An MR already exists on 
 
 ## 5. Close the plan
 
-After the MR/PR is created, check docs/plans/active/ for a plan in IN_REVIEW whose branch matches the current one. Found → offer to close it (only on the human's yes): set Status: DONE, fill its Result section (MR/PR URL, date, one-line outcome), and move `docs/plans/active/<slug>/` to docs/plans/completed/ per the `doc-standards` skill. Not found, or the human declines → leave everything as is.
+After the MR/PR is created, check docs/plans/active/ for a plan in IN_REVIEW whose branch matches the current one. Found → offer to close it (only on the human's yes): set Status: DONE, fill its Result section (MR/PR URL, date, one-line outcome), and move `docs/plans/active/<slug>/` to docs/plans/completed/ per the `sdf-doc-standards` skill. Not found, or the human declines → leave everything as is.

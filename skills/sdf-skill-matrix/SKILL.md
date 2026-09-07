@@ -1,6 +1,6 @@
 ---
-name: skill-matrix
-description: Service skill — loaded by the plan and implement skills; not invoked by the user. Maps the task's capability areas to domain skills actually installed in the current environment. Names no concrete skills, because every engineer's machine carries a different set.
+name: sdf-skill-matrix
+description: Service skill — loaded by the sdf-plan and sdf-implement skills; not invoked by the user. Maps the task's capability areas to domain skills actually installed in the current environment. Names no concrete skills, because every engineer's machine carries a different set.
 ---
 
 # skill-matrix

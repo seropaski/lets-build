@@ -1,5 +1,5 @@
 ---
-name: review
+name: sdf-review
 description: Two-layer review of a change — compliance with the task's spec, plan, and ADRs, then a high-confidence code review across six tracks (security, performance, business logic, deploy safety, duplication, dead code). Advisory only; no edits until the full review is written and the human asks for fixes. Input optional scope word, commit, branch, or PR; empty input reviews uncommitted changes.
 ---
 
@@ -27,4 +27,4 @@ Fix offers come after the full text, each naming its mode: code for direct fixes
 
 ## Closing
 
-APPROVE → the change ships, and `ship` closes the plan: status DONE, its Result section (MR/PR link, date, one-line outcome), and the dir moved to docs/plans/completed/ per the `doc-standards` skill. NEEDS CHANGES → set the plan's status back to IN_PROGRESS and hand the defect list to implement; no plan file moves until an approval ships.
+APPROVE → the change ships, and `sdf-ship` closes the plan: status DONE, its Result section (MR/PR link, date, one-line outcome), and the dir moved to docs/plans/completed/ per the `sdf-doc-standards` skill. NEEDS CHANGES → set the plan's status back to IN_PROGRESS and hand the defect list to sdf-implement; no plan file moves until an approval ships.

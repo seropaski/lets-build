@@ -22,7 +22,7 @@ Expected but missing (no typecheck, no formatter) → "Open gaps" in the report.
 
 ## 2. Tree
 
-Per the `doc-standards` skill, create missing only:
+Per the `sdf-doc-standards` skill, create missing only:
 
     AGENTS.md
     docs/glossary/glossary.md

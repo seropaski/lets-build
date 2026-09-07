@@ -39,7 +39,7 @@
     Current: <what is being worked on right now>
     Next: <the next steps, ordered>
     Blocked: <what and why> | None
-    Filled by implement after every milestone.
+    Filled by sdf-implement after every milestone.
 
     ## Decisions
     DEC-01 — <decision>
@@ -59,4 +59,4 @@
     referencing the spec's scenarios.
 
     ## Result
-    Filled by ship at closing: MR/PR link, date, one-line outcome.
+    Filled by sdf-ship at closing: MR/PR link, date, one-line outcome.

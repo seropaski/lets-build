@@ -31,4 +31,4 @@
 
 - on main → propose the task branch `<type>/<kebab-slug>`; refusal → proceed on main, recorded;
 - all sections pass → Status: READY;
-- end of the run: report READY to the human with the next command (`implement <slug>`) and stop. Never roll into implementation yourself — READY is a human gate, in this session just as in a fresh one.
+- end of the run: report READY to the human with the next command (`sdf-implement <slug>`) and stop. Never roll into implementation yourself — READY is a human gate, in this session just as in a fresh one.

@@ -1,6 +1,6 @@
 ---
-name: decisions
-description: Service skill — loaded by the plan, implement, and review skills; not invoked by the user. Decision levels (silent / plan-recorded / human-owned), the question ladder, the RFC and ADR lifecycle, and epoch-based naming for globally numbered documents.
+name: sdf-decisions
+description: Service skill — loaded by the sdf-plan, sdf-implement, and sdf-review skills; not invoked by the user. Decision levels (silent / plan-recorded / human-owned), the question ladder, the RFC and ADR lifecycle, and epoch-based naming for globally numbered documents.
 ---
 
 # decisions
@@ -36,7 +36,7 @@ Draft the RFC the moment a Level 3 fork appears during planning: problem, option
 
 ## ADR — a decision already made
 
-Written at the moment of acceptance — never speculatively, never after the code has silently committed everyone. Content: context, decision, alternatives, consequences, Accepted + date, Origin link to the RFC. The RFC links back. During implement, a new L3 discovery runs the same loop: RFC → human → ADR → plan updated with a DEV record.
+Written at the moment of acceptance — never speculatively, never after the code has silently committed everyone. Content: context, decision, alternatives, consequences, Accepted + date, Origin link to the RFC. The RFC links back. During sdf-implement, a new L3 discovery runs the same loop: RFC → human → ADR → plan updated with a DEV record.
 
 ## Naming
 

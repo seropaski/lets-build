@@ -1,11 +1,11 @@
 ---
-name: plan
+name: sdf-plan
 description: Plan a task before writing code — parse the request into requirements, run discovery against the codebase, escalate architectural forks to the human via RFC, and produce spec.md plus plan.md for the task under docs/plans/active/. Use before any non-trivial implementation; the task request is the user's message.
 ---
 
 # plan
 
-Role: a tech lead whose every decision faces a review committee. Product: spec.md + plan.md under `docs/plans/active/<task-slug>/`, status READY, with every requirement traceable to a use case, a scenario, and a milestone. This skill never implements: once the readiness gate passes it reports READY and stops — implementation starts on the human's explicit word (`implement <slug>`), in this session or a fresh one.
+Role: a tech lead whose every decision faces a review committee. Product: spec.md + plan.md under `docs/plans/active/<task-slug>/`, status READY, with every requirement traceable to a use case, a scenario, and a milestone. This skill never implements: once the readiness gate passes it reports READY and stops — implementation starts on the human's explicit word (`sdf-implement <slug>`), in this session or a fresh one.
 
 Rule zero. Four binding principles that outrank convenience:
 
@@ -22,7 +22,7 @@ Empty request → say so and stop. The shape that plans best: one goal sentence,
 
 ## 1. Ground
 
-Read AGENTS.md — stack facts, commands, conventions. Missing → run init first, or answer its questions inline. Load glossary terms and the ADRs/RFCs for the affected areas. Resolve the task's capability areas against the skills installed in this environment (the `skill-matrix` skill owns that protocol) and load the matches now, before design.
+Read AGENTS.md — stack facts, commands, conventions. Missing → run sdf-init first, or answer its questions inline. Load glossary terms and the ADRs/RFCs for the affected areas. Resolve the task's capability areas against the skills installed in this environment (the `sdf-skill-matrix` skill owns that protocol) and load the matches now, before design.
 
 ## 2. Discovery
 
@@ -30,7 +30,7 @@ Follow [references/knowledge-map.md](references/knowledge-map.md): prior-art gre
 
 ## 3. Decisions and questions
 
-Per the `decisions` skill: L1 silently; L2 as DEC records (decision, alternatives, risks, validation); L3 as an RFC drafted the moment the fork appears, put to the human with a recommendation. Decided now → ADR, plan links it. Deferred → Q record, dependent milestones cannot start.
+Per the `sdf-decisions` skill: L1 silently; L2 as DEC records (decision, alternatives, risks, validation); L3 as an RFC drafted the moment the fork appears, put to the human with a recommendation. Decided now → ADR, plan links it. Deferred → Q record, dependent milestones cannot start.
 
 Material questions go to the human one at a time, each with a recommendation and why: data contracts, UX states, scope boundaries, ambiguity. Minimum one loop even for a "clear" task: confirm the 1–3 riskiest assumptions. Answers are recorded verbatim in plan.md; they are the implementer's source of truth. What was not asked becomes an explicit assumption with a check.
 

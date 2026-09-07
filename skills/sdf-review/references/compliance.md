@@ -18,7 +18,7 @@ For each R#: where does the diff implement it, and which scenario proves it? Not
 ## Architecture compliance
 
 - every ADR the plan links: respected in the changed code;
-- the change introduces a Level 3 pattern (a shared abstraction others must use, a new data flow) with no RFC and no ADR → blocker: route through the `decisions` skill; do not approve silently;
+- the change introduces a Level 3 pattern (a shared abstraction others must use, a new data flow) with no RFC and no ADR → blocker: route through the `sdf-decisions` skill; do not approve silently;
 - AGENTS.md conventions per touched file: import alias, layer boundaries, public APIs.
 
 ## Verdicts

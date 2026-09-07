@@ -4,7 +4,7 @@ Work top-down; each level either answers or sends you deeper.
 
 ## 1. Glossary
 
-Load the terms the request uses. A term the request uses ambiguously with no glossary entry → ask the human what it means HERE, then propose the entry in the doc-standards format. The glossary exists so this question is asked once per project, not once per task.
+Load the terms the request uses. A term the request uses ambiguously with no glossary entry → ask the human what it means HERE, then propose the entry in the sdf-doc-standards format. The glossary exists so this question is asked once per project, not once per task.
 
 ## 2. ADR / RFC scan
 
@@ -28,7 +28,7 @@ Before designing anything new, find what exists: similar components, hooks, filt
 
 ## 5. Deep exploration
 
-Medium tasks and up: dispatch read-only explore subagents in parallel, one per independent area — touched files, patterns, data contracts, change boundaries; the role contract lives in the `orchestration` skill. A quick isolated edit does not need one.
+Medium tasks and up: dispatch read-only explore subagents in parallel, one per independent area — touched files, patterns, data contracts, change boundaries; the role contract lives in the `sdf-orchestration` skill. A quick isolated edit does not need one.
 
 ## 6. Claim check
 

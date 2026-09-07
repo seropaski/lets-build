@@ -10,9 +10,9 @@ Five public skills cover the life of a task; four service skills carry the share
 
 The command installs the skills into your agent's skills directory. Skills reference each other by name, so no path configuration is needed; copying the directories there manually works just as well.
 
-Installation completes inside the target repository — run `init` there once:
+Installation completes inside the target repository — run `/sdf-init` there once:
 
-    > init
+    > /sdf-init
 
 It creates the project's AGENTS.md and the docs/ knowledge tree and seeds the glossary, which every other skill reads. Without this step the workflow has no project knowledge to plan against.
 
@@ -20,27 +20,27 @@ Requirements: an agent that supports skills and subagent spawning (implement and
 
 ## Quick start
 
-    init                          once per repo: AGENTS.md + docs/ tree
-    plan <task>                   spec.md + plan.md, status READY
-    implement <slug>              milestones, progress written back to plan.md
-    review                        compliance + code review of the diff
-    ship                          commit + MR/PR
+    /sdf-init                     once per repo: AGENTS.md + docs/ tree
+    /sdf-plan <task>              spec.md + plan.md, status READY
+    /sdf-implement <slug>         milestones, progress written back to plan.md
+    /sdf-review                   compliance + code review of the diff
+    /sdf-ship                     commit + MR/PR
 
 Every transition below is a human decision: the agent never rolls from planning into coding, or from coding into committing, by itself.
 
 ## The workflow
 
-    init        once per repo — AGENTS.md, docs tree, glossary seed
+    /sdf-init       once per repo — AGENTS.md, docs tree, glossary seed
       ↓
-    plan        <task>  →  spec.md + plan.md, status READY
+    /sdf-plan       <task>  →  spec.md + plan.md, status READY
                 architectural forks go RFC → human decision → ADR
       ↓
-    implement   milestones through subagents; progress, deviations,
+    /sdf-implement  milestones through subagents; progress, deviations,
                 and blockers written back to plan.md
       ↓
-    review      spec/plan/ADR compliance + six-track code review
+    /sdf-review     spec/plan/ADR compliance + six-track code review
       ↓
-    ship        commit + MR/PR (GitLab or GitHub, auto-detected)
+    /sdf-ship       commit + MR/PR (GitLab or GitHub, auto-detected)
 
 A plan is a living document. During implementation the agent ticks milestones and records deviations and blockers in it, so any later session continues from that state:
 
@@ -55,13 +55,13 @@ A plan is a living document. During implementation the agent ticks milestones an
 
 ### Set up a repository
 
-    > init
+    > /sdf-init
 
 The agent detects the stack from manifests, creates AGENTS.md and the docs/ tree (glossary, architecture/adr, architecture/rfcs, conventions, plans/active, plans/completed), seeds the glossary with real domain terms from the code, and reports what it changed and what the human should fill in by hand. An existing AGENTS.md and docs/ are updated in place, never overwritten; human-written sections stay untouched. Re-run after a major stack change.
 
 ### Plan a feature
 
-    > plan Add a multi-select status filter to the orders page:
+    > /sdf-plan Add a multi-select status filter to the orders page:
       1. Filter by several statuses at once
       2. Filter state survives a page reload (URL)
       3. A reset button clears the filter
@@ -74,30 +74,30 @@ If the task hides an architectural fork (say, a shared filter abstraction other 
 
 ### Implement a plan
 
-    > implement orders-status-filter
+    > /sdf-implement orders-status-filter
 
-A bare `implement` also works when exactly one plan is READY or in progress. The agent orchestrates subagents: one writes, another validates the result, a third reviews the milestone. It never edits code itself. After every milestone the plan is updated: ticks, progress, deviations, new questions. A blocked question flips the plan to BLOCKED and stops that thread while independent milestones continue. The run ends IN_REVIEW.
+A bare `/sdf-implement` also works when exactly one plan is READY or in progress. The agent orchestrates subagents: one writes, another validates the result, a third reviews the milestone. It never edits code itself. After every milestone the plan is updated: ticks, progress, deviations, new questions. A blocked question flips its milestone to [!] with a Q record and stops that thread while independent milestones continue. The run ends IN_REVIEW.
 
 ### Resume interrupted work
 
-    > implement orders-status-filter       # any time, in any session
+    > /sdf-implement orders-status-filter       # any time, in any session
 
 State lives in plan.md and git, not in the chat. The agent reconciles the plan against the actual worktree, corrects it if reality diverged, and continues at the first unfinished milestone.
 
 ### Review changes
 
-    > review                # uncommitted changes (the default)
-    > review staged         # only what is staged
-    > review branch main    # the whole branch against main
-    > review 1834           # a pull request
+    > /sdf-review                # uncommitted changes (the default)
+    > /sdf-review staged         # only what is staged
+    > /sdf-review branch main    # the whole branch against main
+    > /sdf-review 1834           # a pull request
 
 Two layers. Compliance first: does the change match its spec, plan, and ADRs. Then code: six tracks (security, performance, business logic, deploy safety, duplication, dead code), sized to the diff, run by research subagents on larger changes. Style and taste are never flagged. The review is advisory: findings first, fixes only on your request.
 
 ### Commit and open an MR
 
-    > ship                              # commit + push + MR/PR
-    > ship commit only                  # just the commit
-    > ship fix: reject empty payloads   # commit with a given subject
+    > /sdf-ship                              # commit + push + MR/PR
+    > /sdf-ship commit only                  # just the commit
+    > /sdf-ship fix: reject empty payloads   # commit with a given subject
 
 Conventional message, secrets checked before staging, hooks respected. GitLab gets push options, GitHub gets gh — detected from the origin remote.
 
@@ -128,20 +128,20 @@ Conventional message, secrets checked before staging, hooks respected. GitLab ge
 
 | Skill | Invoke when | Job |
 |---|---|---|
-| [init](skills/init/SKILL.md) | once per project, and on major stack changes | detect the stack, create AGENTS.md + docs/ knowledge tree, seed the glossary |
-| [plan](skills/plan/SKILL.md) | before implementing anything non-trivial | requirements → discovery → spec.md + plan.md; RFC/ADR for architectural forks |
-| [implement](skills/implement/SKILL.md) | after a plan is READY | milestone loop via subagents; plan.md stays the live state |
-| [review](skills/review/SKILL.md) | before merge | compliance (spec/plan/ADR) + code review |
-| [ship](skills/ship/SKILL.md) | closing a task or checkpointing work | commit + MR/PR; "commit only" skips the forge |
+| [sdf-init](skills/sdf-init/SKILL.md) | once per project, and on major stack changes | detect the stack, create AGENTS.md + docs/ knowledge tree, seed the glossary |
+| [sdf-plan](skills/sdf-plan/SKILL.md) | before implementing anything non-trivial | requirements → discovery → spec.md + plan.md; RFC/ADR for architectural forks |
+| [sdf-implement](skills/sdf-implement/SKILL.md) | after a plan is READY | milestone loop via subagents; plan.md stays the live state |
+| [sdf-review](skills/sdf-review/SKILL.md) | before merge | compliance (spec/plan/ADR) + code review |
+| [sdf-ship](skills/sdf-ship/SKILL.md) | closing a task or checkpointing work | commit + MR/PR; "commit only" skips the forge |
 
 ### Service — invoked by models, not by the user
 
 | Skill | Loaded by | Job |
 |---|---|---|
-| [decisions](skills/decisions/SKILL.md) | plan, implement, review | decision levels, question ladder, RFC/ADR lifecycle, epoch-based naming |
-| [doc-standards](skills/doc-standards/SKILL.md) | init, plan, implement, review | knowledge tree, source-of-truth map, linking rules, glossary format |
-| [orchestration](skills/orchestration/SKILL.md) | implement, review | subagent roles, dispatch prompts, validate/review cycle |
-| [skill-matrix](skills/skill-matrix/SKILL.md) | plan, implement | capability areas → domain skills installed on this machine |
+| [sdf-decisions](skills/sdf-decisions/SKILL.md) | plan, implement, review | decision levels, question ladder, RFC/ADR lifecycle, epoch-based naming |
+| [sdf-doc-standards](skills/sdf-doc-standards/SKILL.md) | init, plan, implement, review | knowledge tree, source-of-truth map, linking rules, glossary format |
+| [sdf-orchestration](skills/sdf-orchestration/SKILL.md) | implement, review | subagent roles, dispatch prompts, validate/review cycle |
+| [sdf-skill-matrix](skills/sdf-skill-matrix/SKILL.md) | plan, implement | capability areas → domain skills installed on this machine |
 
 ## How it compares
 
