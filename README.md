@@ -1,6 +1,4 @@
-# skills
-
-[![skills.sh](https://skills.sh/b/seropaski/skills)](https://skills.sh/seropaski/skills)
+# seropaski/skills
 
 Engineering workflow skills for AI coding agents. A task is planned, implemented, reviewed, and shipped through living documents (spec, plan, ADR, RFC) stored in the target repository itself, so any new session resumes from the repo, not from chat memory.
 
@@ -144,3 +142,31 @@ Conventional message, secrets checked before staging, hooks respected. GitLab ge
 | [doc-standards](skills/doc-standards/SKILL.md) | init, plan, implement, review | knowledge tree, source-of-truth map, linking rules, glossary format |
 | [orchestration](skills/orchestration/SKILL.md) | implement, review | subagent roles, dispatch prompts, validate/review cycle |
 | [skill-matrix](skills/skill-matrix/SKILL.md) | plan, implement | capability areas → domain skills installed on this machine |
+
+## How it compares
+
+[OpenSpec](https://github.com/Fission-AI/openspec) and [Spec Kit](https://github.com/github/spec-kit) are the two best-known spec-driven toolkits, and all three share the same core idea: specify before code. They differ in how much of the task lifecycle they cover and what stays in the repository afterwards.
+
+| | OpenSpec | Spec Kit | This set |
+|---|---|---|---|
+| Lifecycle | proposal → tasks → apply → archive | specify → plan → tasks → implement | init → plan → implement → review → ship, through to merge |
+| Project memory | product spec registry with requirement deltas | one static "constitution" file | glossary, ADRs, RFCs, conventions, archived plans — linked |
+| Execution | one agent over a checklist | one agent over a checklist | writer, validator, and reviewer are separate subagents; validation after every dispatch |
+| Review | document schema validation | `/analyze`, before code | after code: spec/plan/ADR compliance, then six code tracks |
+| Shipping | not covered | not covered | commit + MR/PR, GitLab or GitHub |
+| Session resume | checkboxes | checkboxes | plan status machine, Progress, DEV/Q records, plan-vs-worktree reconciliation |
+| Runtime deps | npm CLI | `specify` CLI + project scripts | none, plain markdown |
+
+**Where this set is stronger:**
+
+- **Code checked by different eyes.** In both toolkits the agent that wrote the code also ticks its own checklist. Here the validator and the reviewer are always separate subagents; they can block a milestone, and "no finding beats a weak finding" keeps the review signal clean.
+- **Decisions survive the task.** A Level 3 fork becomes an RFC, goes to the human, and lands as an ADR the plan links to; the glossary pins what domain terms mean. Neither alternative answers "why is it built this way" six months later.
+- **Review against intent.** `/analyze` runs before code exists. Nothing in either toolkit verifies afterwards that the diff kept its promise; here compliance with spec, plan, and ADRs is checked first, and an undocumented deviation blocks approval.
+- **The loop runs to merge.** Both stop at "the code is written". Here review hands over to ship: commit, MR/PR, plan archived to completed/.
+- **Zero toolchain.** Spec Kit scaffolds helper scripts into your project; OpenSpec ships a CLI. This set is plain markdown: readable in twenty minutes, easy to adjust, indifferent to GitLab vs GitHub, and nothing breaks when you switch agents.
+
+**One real gap:** OpenSpec's product spec registry — `specs/` with requirement deltas — accumulates a per-capability description of what the product does today. This set has no equivalent: ADRs keep the why, the glossary keeps the vocabulary, and behavior truth lives in code and tests. For contract-heavy products that registry is a loss.
+
+The gap is also the easiest one to fill, because the two tools compose. OpenSpec is a documentation layer: what the product does today, capability by capability. This set is the development loop on top of the repository: plan, build, review, ship. Together, OpenSpec's `specs/` joins the doc-standards source-of-truth map, the plan reads it as first-class input during discovery, and ship's closing step offers to update the requirement deltas. One rule keeps them out of each other's way: this set's plan/implement drives the task loop, and `openspec/` is treated as documentation, not as a second workflow.
+
+Pick by the gap: execution discipline, review against intent, and decision memory are covered here. Agent coverage is Spec Kit's and OpenSpec's game. A product spec registry is one OpenSpec install away — alongside, not instead.
