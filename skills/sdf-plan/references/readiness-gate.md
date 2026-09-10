@@ -8,27 +8,25 @@
 
 ## Traceability — the four binding principles
 
-- **think before coding**: every assumption surfaced — an explicit assumption entry with how it will be verified; none hidden in the wording;
-- **simplicity first**: no speculative features, no single-use abstractions, no flexibility or configurability without a requirement, no handling of impossible scenarios; a senior engineer would not call any milestone overcomplicated;
+- **think before coding**: nothing was assumed — every point the request did not state explicitly was asked and answered by the human;
+- **simplicity first**: no speculative features, no single-use abstractions, no unrequested flexibility;
 - **surgical**: every plan line traces to R# / UC# / DEC# or a human answer — no "while we're here";
-- **goal-driven**: every milestone states a verifiable exit criterion; "make it work" fails the gate.
+- **goal-driven**: every milestone states a verifiable exit criterion — "make it work" fails.
 
 ## Decisions
 
-- every DEC has alternatives, risks, and validation; one missing → back to the question loop;
-- every Level 3 fork has an RFC that is decided, or a Q record with BLOCKED — no silent forks;
-- assumptions are explicit, each with how it will be verified.
+- every DEC has alternatives, risks, validation, and the human's verbatim answer (Q trace);
+- every L3 fork has a decided RFC, or the human's explicit deferral with its dependent milestones marked [!];
+- every Q is RESOLVED — a deferral counts; OPEN or BLOCKED fails the gate, and the model never supplied an answer itself.
 
 ## Consistency
 
-- spec and plan link each other;
-- milestones cover every UC;
-- every skill in the table maps to a milestone;
-- validation commands exist in package.json under those exact names — an invented command fails the gate;
+- spec and plan link each other; milestones cover every UC; every skill maps to a milestone;
+- validation: the project's real commands by their exact names for code changes; for a codeless deliverable, manually checkable scenarios a reviewer can follow — an invented command fails the gate;
 - ADR links resolve; glossary terms used in the spec exist in the glossary.
 
 ## Hand-off
 
-- on main → propose the task branch `<type>/<kebab-slug>`; refusal → proceed on main, recorded;
+- on main → propose the task branch `<type>/<kebab-slug>`; refusal recorded;
 - all sections pass → Status: READY;
-- end of the run: report READY to the human with the next command (`sdf-implement <slug>`) and stop. Never roll into implementation yourself — READY is a human gate, in this session just as in a fresh one.
+- report READY with the next command (`sdf-implement <slug>`) and STOP. Never roll into implementation — READY is a human gate, in this session as in a fresh one.

@@ -43,7 +43,8 @@
 
     ## Decisions
     DEC-01 — <decision>
-      Alternatives / Risks / Validation        (L2 only; see decisions skill)
+      Answer: <the human's choice, verbatim> (Q-xx)
+      Alternatives / Risks / Validation        (see decisions skill)
 
     ## Deviations
     DEV-01 — <what changed vs the plan>
@@ -53,6 +54,9 @@
     Q-01 — <question>
       Status: OPEN | BLOCKED | RESOLVED
       Why it matters / Waiting for / Resolution
+    At READY none is OPEN or BLOCKED — every question carries the human's
+    verbatim answer; a deferral is RESOLVED and its dependent milestones
+    are marked [!] from the start.
 
     ## Validation
     Commands from package.json (real names only) + manual scenarios per risk,

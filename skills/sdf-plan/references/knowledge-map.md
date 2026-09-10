@@ -8,7 +8,7 @@ Load the terms the request uses. A term the request uses ambiguously with no glo
 
 ## 2. ADR / RFC scan
 
-grep docs/architecture/adr and rfcs for the task's entities and areas. A plan that would violate an ADR either complies or goes to the human with the conflict spelled out. No ADR on topic → note it; that silence feeds the L3 check later.
+grep docs/architecture/adr, docs/architecture/rfcs, and docs/design for the task's entities and areas. A design doc for a touched area is required reading: it states how the area works today. A plan that would violate an ADR either complies or goes to the human with the conflict spelled out. No ADR on topic → note it; that silence feeds the L3 check later.
 
 ## 3. Prior art — before any new research
 
@@ -16,7 +16,7 @@ Search docs/plans/active and completed for earlier work on the same problem.
 
 1. **Content grep first.** Extract the nouns from the requirements: entities, UI sections, operations. For each: grep -i over plan bodies in at least two variants, the natural-language term AND its code spelling from routes/models/files, plus plurals. A body match is a candidate even when the dir name is an opaque slug, which most are.
 2. **File-name glob second**, additional only. Zero name matches proves nothing.
-3. **Read every candidate.** More than five → rank by term-hit precision, then recency. Extract decisions, data contracts, touched files, scenarios.
+3. **Read every candidate.** More than five → rank by term-hit precision, then recency by the epoch prefix of the dir name. Extract decisions, data contracts, touched files, scenarios.
 
 "Nothing found" is legitimate only after at least two term variants were actually grepped — the Prior art section then lists those terms.
 

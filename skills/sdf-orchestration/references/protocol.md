@@ -10,7 +10,7 @@
     Context: <stack facts, touched modules, patterns, fixtures>
     Conventions: <from AGENTS.md — layers, import alias, public APIs>
     Skills to load first: <from the plan's skill table>
-    Binding principles: think before coding — state assumptions first;
+    Binding principles: think before coding — surface assumptions as questions, do not decide them;
     simplicity first — nothing beyond the task, no speculative abstraction,
     no "improvements" of adjacent code; surgical changes — only this task's
     files; goal-driven — say how you will verify before you code.

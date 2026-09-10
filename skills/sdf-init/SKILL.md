@@ -1,6 +1,6 @@
 ---
 name: sdf-init
-description: Set up a repository for the agent development workflow — detect the stack, create AGENTS.md and the docs knowledge tree (glossary, ADR, RFC, conventions, plans), and record project conventions. Run once per project; re-run to refresh after major stack changes.
+description: Set up a repository for the agent development workflow — detect the stack, create AGENTS.md and the docs knowledge tree (glossary, design, ADR, RFC, conventions, plans), and record project conventions. Run once per project; re-run to refresh after major stack changes.
 ---
 
 # init
@@ -13,11 +13,11 @@ AGENTS.md already exists → this run updates in place: keep human-written secti
 
 ## 1. Detect the stack
 
-Evidence only — what files prove, no guessing: package.json, tsconfig.json, next.config.*, components.json, pyproject.toml, go.mod, Cargo.toml, CI configs, .editorconfig. Record: framework + version, language, UI system, state/data handling, layering, import alias, real script names for lint/format/test/typecheck/build (invent none). Something expected is missing (no typecheck, no formatter) → list it as an open gap; do not install silently.
+Evidence only — what files prove, no guessing: package.json, tsconfig.json, next.config.*, components.json, pyproject.toml, go.mod, Cargo.toml, CI configs, .editorconfig. Record: framework + version, language, UI system, state/data handling, layering, import alias, real script names for lint/format/test/typecheck/build (invent none). No manifests at all (empty or docs-only repo) → Stack states "undetected — no manifests found"; report that the tree fills in as code lands. Something expected is missing (no typecheck, no formatter) → list it as an open gap; do not install silently.
 
 ## 2. Create the tree
 
-Per the `sdf-doc-standards` skill: docs/glossary, docs/architecture/{adr,rfcs}, docs/conventions, docs/plans/{active,completed}. Create what is missing, keep what exists.
+Per the `sdf-doc-standards` skill: docs/glossary, docs/architecture/{adr,rfcs}, docs/design, docs/conventions, docs/plans/{active,completed}. Create what is missing, keep what exists.
 
 ## 3. Seed
 

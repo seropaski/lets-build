@@ -22,13 +22,7 @@ Expected but missing (no typecheck, no formatter) → "Open gaps" in the report.
 
 ## 2. Tree
 
-Per the `sdf-doc-standards` skill, create missing only:
-
-    AGENTS.md
-    docs/glossary/glossary.md
-    docs/architecture/adr/          docs/architecture/rfcs/
-    docs/conventions/
-    docs/plans/active/              docs/plans/completed/
+Create exactly the tree the `sdf-doc-standards` skill lists (loaded with this run) — missing entries only; keep what exists. design/ stays empty: filling it is the sdf-research skill's job.
 
 ## 3. Glossary seed
 

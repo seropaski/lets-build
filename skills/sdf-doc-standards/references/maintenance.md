@@ -8,6 +8,7 @@
 | deviation found during implement | DEV record in plan.md |
 | milestone done | milestone tick + Progress (Current/Next) in plan.md |
 | task DONE | plan dir active → completed, status DONE, ADRs created are linked from the plan |
+| shipped task changed an area's behavior | docs/design/<area>.md updated to the new current state |
 | convention drift spotted | `conventions/<area>.md`; if recurring, propose an ADR |
 | stack change | AGENTS.md Stack and Commands sections |
 

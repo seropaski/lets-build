@@ -36,7 +36,7 @@ Never flagged: style, clean-code taste, naming, formatting, lint-only issues, ge
 
 Adjust one tier for mixed signals — test-only additive changes down, few files but auth-critical up.
 
-Subagents are research-only: they never edit and never write the final review. Each gets the scope, its track, and the relevant refs. It returns only high-confidence findings: path, line (changed in this diff), confidence high, why, finding, suggestion. Or NO_FINDINGS.
+Subagents are read-only: they never edit and never write the final review. Each gets the scope, its track, and the relevant refs. It returns only high-confidence findings: path, line (changed in this diff), confidence high, why, finding, suggestion. Or NO_FINDINGS.
 
 ## Filtering
 

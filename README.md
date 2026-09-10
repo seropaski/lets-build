@@ -1,126 +1,79 @@
 # seropaski/skills
 
-Engineering workflow skills for AI coding agents. A task is planned, implemented, reviewed, and shipped through living documents (spec, plan, ADR, RFC) stored in the target repository itself, so any new session resumes from the repo, not from chat memory.
+Engineering workflow skills for AI coding agents. Tasks run through living documents — spec, plan, ADR, RFC, design — stored in the repository itself. A new session resumes from the repo, not from chat memory.
 
-Five public skills cover the life of a task; four service skills carry the shared machinery. The agent reads its rules from the project's AGENTS.md, plans against the project's own knowledge tree, and writes progress back as it works.
+Six public skills: init, research, plan, implement, review, ship. Four service skills carry the shared machinery.
 
 ## Install
 
     npx skills add seropaski/skills
 
-The command installs the skills into your agent's skills directory. Skills reference each other by name, so no path configuration is needed; copying the directories there manually works just as well.
-
-Installation completes inside the target repository — run `/sdf-init` there once:
-
-    > /sdf-init
-
-It creates the project's AGENTS.md and the docs/ knowledge tree and seeds the glossary, which every other skill reads. Without this step the workflow has no project knowledge to plan against.
-
-Requirements: an agent that supports skills and subagent spawning (implement and review raise subagents for every role), and git in the target repository.
-
-## Quick start
-
-    /sdf-init                     once per repo: AGENTS.md + docs/ tree
-    /sdf-plan <task>              spec.md + plan.md, status READY
-    /sdf-implement <slug>         milestones, progress written back to plan.md
-    /sdf-review                   compliance + code review of the diff
-    /sdf-ship                     commit + MR/PR
-
-Every transition below is a human decision: the agent never rolls from planning into coding, or from coding into committing, by itself.
+Then run `/sdf-init` once in the target repository — it creates the AGENTS.md and docs/ tree every other skill reads. Needs an agent with skills and subagent spawning, and git.
 
 ## The workflow
 
     /sdf-init       once per repo — AGENTS.md, docs tree, glossary seed
       ↓
-    /sdf-plan       <task>  →  spec.md + plan.md, status READY
-                architectural forks go RFC → human decision → ADR
+    /sdf-plan       <task> → spec.md + plan.md, status READY
       ↓
-    /sdf-implement  milestones through subagents; progress, deviations,
-                and blockers written back to plan.md
+    /sdf-implement  milestones via subagents, progress written to plan.md
       ↓
     /sdf-review     spec/plan/ADR compliance + six-track code review
       ↓
     /sdf-ship       commit + MR/PR (GitLab or GitHub, auto-detected)
 
-A plan is a living document. During implementation the agent ticks milestones and records deviations and blockers in it, so any later session continues from that state:
+    /sdf-research   any time, outside the loop — explore the code, write
+                    design docs, glossary, conventions
+
+Every transition is a human decision: the agent never rolls from planning into coding, or from coding into committing. plan.md stays the live state — ticks, deviations, blockers — so any session continues where the last one stopped:
 
     ## Milestones
     - [x] M1 Query hooks and fixtures
-    - [x] M2 Filter UI
     - [-] M3 URL sync
-    - [ ] M4 Reset action
-    - [!] M5 Integration tests        Q-02 BLOCKED: statuses endpoint returns 500
+    - [!] M5 Integration tests    Q-02 BLOCKED: statuses endpoint returns 500
 
-## Usage examples
+## What the repository gains
 
-### Set up a repository
+    AGENTS.md                       how the agent works in this repo
+    docs/
+      glossary/glossary.md          what domain terms mean here
+      architecture/adr/             accepted decisions, with their reasons
+      architecture/rfcs/            decisions under discussion
+      design/                       what the system does today, one file per area
+      conventions/                  per-area rules
+      plans/active/<id>-<slug>/     spec.md + plan.md of running tasks
+      plans/completed/              archived at DONE
 
-    > /sdf-init
+The tree is closed: documentation exists only in these places, and only sdf-init extends it.
 
-The agent detects the stack from manifests, creates AGENTS.md and the docs/ tree (glossary, architecture/adr, architecture/rfcs, conventions, plans/active, plans/completed), seeds the glossary with real domain terms from the code, and reports what it changed and what the human should fill in by hand. An existing AGENTS.md and docs/ are updated in place, never overwritten; human-written sections stay untouched. Re-run after a major stack change.
+## Usage
 
-### Plan a feature
+**Set up.** `/sdf-init` detects the stack from manifests, creates the tree, seeds the glossary with real domain terms, reports the gaps. Existing files update in place; human prose stays untouched.
+
+**Research.** `/sdf-research How does an order's status travel from the API to the UI?` — no code changes, no spec. Every claim is proven by a file path; the answer lands in docs/design/orders.md, new terms in the glossary, observed rules in conventions. Forks become RFCs put to you with a recommendation.
+
+**Plan.**
 
     > /sdf-plan Add a multi-select status filter to the orders page:
       1. Filter by several statuses at once
-      2. Filter state survives a page reload (URL)
+      2. Filter state survives a reload (URL)
       3. A reset button clears the filter
-      Materials: GET /orders?statuses=..., Figma board FGM-123
-      Do not touch: the existing date-range filter
 
-The numbered items become tracked requirements; unnumbered text becomes one requirement. The agent explores the codebase for prior plans, reusable components, and relevant ADRs, asks material questions one at a time (data contracts, edge cases, scope), records every answer verbatim, then writes spec.md (requirements, use cases, acceptance scenarios) and plan.md (discovery, architecture, milestones). The run ends with status READY and a branch suggestion, and the agent stops: no code is written until you say so.
+Numbered items become tracked requirements. The agent explores prior plans, reusable components, and ADRs — then asks everything the request does not state, in small batches, each question with options and a recommendation. No plan reaches READY with an open question. An architectural fork becomes an RFC; you decide; an ADR records it.
 
-If the task hides an architectural fork (say, a shared filter abstraction other registries would have to adopt), the agent drafts an RFC with options and a recommendation before asking. You decide; the decision is recorded as an ADR and the plan references it. A deferred decision leaves the plan BLOCKED, not guessed.
+**Implement.** `/sdf-implement orders-status-filter` — subagents write, validate, and review each milestone; the orchestrator never edits code. Progress, deviations (DEV), and new questions (Q) land in plan.md after every milestone. A blocked question flips its milestone to [!] and stops that thread while others continue. Re-run in any session: the plan is reconciled against the worktree and work resumes. Ends IN_REVIEW.
 
-### Implement a plan
+**Review.** `/sdf-review` reviews uncommitted changes; `staged`, `branch main`, or a PR number works too. Compliance first (spec, plan, ADRs, design docs), then six code tracks — security, performance, business logic, deploy safety, duplication, dead code — on read-only subagents. Style is never flagged. Findings first, fixes only on request. No plan on the branch → code-only review, stated up front.
 
-    > /sdf-implement orders-status-filter
-
-A bare `/sdf-implement` also works when exactly one plan is READY or in progress. The agent orchestrates subagents: one writes, another validates the result, a third reviews the milestone. It never edits code itself. After every milestone the plan is updated: ticks, progress, deviations, new questions. A blocked question flips its milestone to [!] with a Q record and stops that thread while independent milestones continue. The run ends IN_REVIEW.
-
-### Resume interrupted work
-
-    > /sdf-implement orders-status-filter       # any time, in any session
-
-State lives in plan.md and git, not in the chat. The agent reconciles the plan against the actual worktree, corrects it if reality diverged, and continues at the first unfinished milestone.
-
-### Review changes
-
-    > /sdf-review                # uncommitted changes (the default)
-    > /sdf-review staged         # only what is staged
-    > /sdf-review branch main    # the whole branch against main
-    > /sdf-review 1834           # a pull request
-
-Two layers. Compliance first: does the change match its spec, plan, and ADRs. Then code: six tracks (security, performance, business logic, deploy safety, duplication, dead code), sized to the diff, run by research subagents on larger changes. Style and taste are never flagged. The review is advisory: findings first, fixes only on your request.
-
-### Commit and open an MR
-
-    > /sdf-ship                              # commit + push + MR/PR
-    > /sdf-ship commit only                  # just the commit
-    > /sdf-ship fix: reject empty payloads   # commit with a given subject
-
-Conventional message, secrets checked before staging, hooks respected. GitLab gets push options, GitHub gets gh — detected from the origin remote.
-
-## Scenarios
-
-**A feature with a clear spec.** plan, two or three questions, READY. You skim the plan, say go, implement runs the milestones with validation after every step, review approves, ship opens the MR. Code exists only under an approved plan, and every requirement carries a manually checkable scenario.
-
-**An architectural fork.** plan detects that a choice outlives the task, drafts an RFC, you pick, an ADR records it. The next task touching that area inherits the decision instead of re-arguing it.
-
-**Interrupted work.** The session died mid-milestone. New session, same command: the plan says where things stand, git shows what actually happened, the agent reconciles the two and continues. Nothing lives only in chat history.
-
-**Blocked mid-implementation.** A missing API detail stops one thread: its milestone flips to [!] with a Q record naming what is awaited, and independent milestones keep moving; the plan itself goes BLOCKED only when nothing can move. The unblock is one answer away — give it in the same or a fresh session, and implement records it and resumes.
-
-**A drive-by change.** Small fix, no plan. Edit, review (the review states that no plan applies and checks code only), ship. The compliance layer is absent by design, not faked.
+**Ship.** `/sdf-ship` commits and opens the MR/PR; `commit only` stops after the commit. Conventional message, secrets checked, hooks respected, forge auto-detected. On approval it closes the plan: DONE, archive to completed/, design docs updated.
 
 ## What this buys you
 
-- **Sessions are disposable.** The repository holds the task state. A new session, a different agent, or a human picks up from plan.md and git.
-- **No code without an approved plan.** Every change traces to a requirement, a use case, or a recorded answer. Speculative work fails the readiness gate and the review.
-- **Decisions survive turnover.** ADRs keep the why, the glossary keeps the vocabulary, RFCs keep rejected paths with their reasons. The agent stops re-asking what the domain terms mean in this codebase.
-- **Verification is continuous.** An independent subagent validates every change; acceptance scenarios are runnable by hand; the final gate refuses to close while any scenario went unrun.
-- **Review checks more than code.** Requirement, plan, and architecture compliance come before the code tracks, so a technically clean diff that betrays the plan still fails.
-- **The human keeps the decisions that matter.** Architecture goes RFC → human → ADR. Research, implementation, validation, and review are the agent's job.
+- **Sessions are disposable.** State lives in plan.md and git — a new session, agent, or human picks it up.
+- **Questions, not guesses.** Every unstated point is asked, batched, with options; the answer lands verbatim in the plan.
+- **Memory survives turnover.** ADRs keep the why, design/ the current state, the glossary the vocabulary, RFCs the rejected paths.
+- **Different eyes on every change.** A validator and a reviewer — never the author — check each dispatch and milestone.
+- **The loop runs to merge.** Review checks intent before code; ship commits, opens the MR, archives the plan.
 
 ## Skills reference
 
@@ -128,45 +81,41 @@ Conventional message, secrets checked before staging, hooks respected. GitLab ge
 
 | Skill | Invoke when | Job |
 |---|---|---|
-| [sdf-init](skills/sdf-init/SKILL.md) | once per project, and on major stack changes | detect the stack, create AGENTS.md + docs/ knowledge tree, seed the glossary |
-| [sdf-plan](skills/sdf-plan/SKILL.md) | before implementing anything non-trivial | requirements → discovery → spec.md + plan.md; RFC/ADR for architectural forks |
-| [sdf-implement](skills/sdf-implement/SKILL.md) | after a plan is READY | milestone loop via subagents; plan.md stays the live state |
-| [sdf-review](skills/sdf-review/SKILL.md) | before merge | compliance (spec/plan/ADR) + code review |
-| [sdf-ship](skills/sdf-ship/SKILL.md) | closing a task or checkpointing work | commit + MR/PR; "commit only" skips the forge |
+| [sdf-init](skills/sdf-init/SKILL.md) | once per project | stack detection, AGENTS.md + docs tree, glossary seed |
+| [sdf-research](skills/sdf-research/SKILL.md) | deliverable is understanding or docs | design docs, glossary, conventions — read-only toward code |
+| [sdf-plan](skills/sdf-plan/SKILL.md) | before any non-trivial change | requirements → discovery → questions → spec.md + plan.md, READY |
+| [sdf-implement](skills/sdf-implement/SKILL.md) | plan is READY | milestone loop via subagents, plan.md as live state |
+| [sdf-review](skills/sdf-review/SKILL.md) | before merge | compliance + six-track code review |
+| [sdf-ship](skills/sdf-ship/SKILL.md) | closing or checkpointing | commit + MR/PR; closes the plan |
 
-### Service — invoked by models, not by the user
+### Service — loaded by other skills
 
 | Skill | Loaded by | Job |
 |---|---|---|
-| [sdf-decisions](skills/sdf-decisions/SKILL.md) | plan, implement, review | decision levels, question ladder, RFC/ADR lifecycle, epoch-based naming |
-| [sdf-doc-standards](skills/sdf-doc-standards/SKILL.md) | init, plan, implement, review | knowledge tree, source-of-truth map, linking rules, glossary format |
-| [sdf-orchestration](skills/sdf-orchestration/SKILL.md) | implement, review | subagent roles, dispatch prompts, validate/review cycle |
-| [sdf-skill-matrix](skills/sdf-skill-matrix/SKILL.md) | plan, implement | capability areas → domain skills installed on this machine |
+| [sdf-decisions](skills/sdf-decisions/SKILL.md) | plan, research, implement, review | decision levels, question ladder, RFC/ADR lifecycle, epoch naming |
+| [sdf-doc-standards](skills/sdf-doc-standards/SKILL.md) | all of the above + init | closed docs tree, source-of-truth map, glossary format |
+| [sdf-orchestration](skills/sdf-orchestration/SKILL.md) | plan, research, implement, review | subagent roles (explorer included), dispatch prompts, validate/review cycle |
+| [sdf-skill-matrix](skills/sdf-skill-matrix/SKILL.md) | plan, research, implement | capability areas → installed domain skills |
 
 ## How it compares
 
-[OpenSpec](https://github.com/Fission-AI/openspec) and [Spec Kit](https://github.com/github/spec-kit) are the two best-known spec-driven toolkits, and all three share the same core idea: specify before code. They differ in how much of the task lifecycle they cover and what stays in the repository afterwards.
+[OpenSpec](https://github.com/Fission-AI/openspec) and [Spec Kit](https://github.com/github/spec-kit) are the best-known spec-driven toolkits. Same core idea everywhere: specify before code. The difference is what the loop covers and what stays in the repo.
 
 | | OpenSpec | Spec Kit | This set |
 |---|---|---|---|
-| Lifecycle | proposal → tasks → apply → archive | specify → plan → tasks → implement | init → plan → implement → review → ship, through to merge |
-| Project memory | product spec registry with requirement deltas | one static "constitution" file | glossary, ADRs, RFCs, conventions, archived plans — linked |
-| Execution | one agent over a checklist | one agent over a checklist | writer, validator, and reviewer are separate subagents; validation after every dispatch |
-| Review | document schema validation | `/analyze`, before code | after code: spec/plan/ADR compliance, then six code tracks |
+| Lifecycle | proposal → tasks → apply → archive | specify → plan → tasks → implement | init → plan → implement → review → ship (research off-loop), to merge |
+| Project memory | spec registry with requirement deltas | one "constitution" file | glossary, ADRs, RFCs, conventions, design, archived plans — linked |
+| Unstated details | agent drafts them into the proposal | agent drafts them into the spec | asked in batches, answers recorded verbatim |
+| Execution | one agent over a checklist | one agent over a checklist | explorer / implementer / validator / reviewer subagents, validation per dispatch |
+| Review | schema validation, before code | `/analyze`, before code | after code: compliance vs spec/plan/ADR, then six code tracks |
 | Shipping | not covered | not covered | commit + MR/PR, GitLab or GitHub |
-| Session resume | checkboxes | checkboxes | plan status machine, Progress, DEV/Q records, plan-vs-worktree reconciliation |
-| Runtime deps | npm CLI | `specify` CLI + project scripts | none, plain markdown |
+| Session resume | checkboxes | checkboxes | status machine, Progress, DEV/Q records, worktree reconciliation |
+| Runtime deps | npm CLI | `specify` CLI + scripts | none — plain markdown |
 
 **Where this set is stronger:**
 
-- **Code checked by different eyes.** In both toolkits the agent that wrote the code also ticks its own checklist. Here the validator and the reviewer are always separate subagents; they can block a milestone, and "no finding beats a weak finding" keeps the review signal clean.
-- **Decisions survive the task.** A Level 3 fork becomes an RFC, goes to the human, and lands as an ADR the plan links to; the glossary pins what domain terms mean. Neither alternative answers "why is it built this way" six months later.
-- **Review against intent.** `/analyze` runs before code exists. Nothing in either toolkit verifies afterwards that the diff kept its promise; here compliance with spec, plan, and ADRs is checked first, and an undocumented deviation blocks approval.
-- **The loop runs to merge.** Both stop at "the code is written". Here review hands over to ship: commit, MR/PR, plan archived to completed/.
-- **Zero toolchain.** Spec Kit scaffolds helper scripts into your project; OpenSpec ships a CLI. This set is plain markdown: readable in twenty minutes, easy to adjust, indifferent to GitLab vs GitHub, and nothing breaks when you switch agents.
-
-**One real gap:** OpenSpec's product spec registry — `specs/` with requirement deltas — accumulates a per-capability description of what the product does today. This set has no equivalent: ADRs keep the why, the glossary keeps the vocabulary, and behavior truth lives in code and tests. For contract-heavy products that registry is a loss.
-
-The gap is also the easiest one to fill, because the two tools compose. OpenSpec is a documentation layer: what the product does today, capability by capability. This set is the development loop on top of the repository: plan, build, review, ship. Together, OpenSpec's `specs/` joins the doc-standards source-of-truth map, the plan reads it as first-class input during discovery, and ship's closing step offers to update the requirement deltas. One rule keeps them out of each other's way: this set's plan/implement drives the task loop, and `openspec/` is treated as documentation, not as a second workflow.
-
-Pick by the gap: execution discipline, review against intent, and decision memory are covered here. Agent coverage is Spec Kit's and OpenSpec's game. A product spec registry is one OpenSpec install away — alongside, not instead.
+- **Nothing is guessed.** Unstated points are asked — batched, with a recommendation — and the answers live verbatim in the plan. Both toolkits let the agent fill the gaps silently.
+- **Different eyes.** The validator and the reviewer are separate subagents; in both toolkits the author ticks its own checklist.
+- **Review after code, against intent.** `/analyze` runs before code exists, and nothing verifies afterwards that the diff kept its promise. Here compliance is checked first, and an undocumented deviation blocks approval.
+- **The loop runs to merge.** Ship commits, opens the MR/PR, archives the plan, updates design docs.
+- **Zero toolchain.** Plain markdown: readable in twenty minutes, easy to adjust, nothing breaks when you switch agents.

@@ -1,28 +1,29 @@
 ---
 name: sdf-doc-standards
-description: Service skill — loaded by the sdf-init, sdf-plan, sdf-implement, and sdf-review skills; not invoked by the user. The project knowledge tree, the source-of-truth map (which document answers which question), linking rules, glossary format, and document maintenance.
+description: Service skill — loaded by sdf-init, sdf-plan, sdf-research, sdf-implement, and sdf-review; not invoked by the user. The closed documentation tree, the source-of-truth map (which document answers which question), linking rules, and glossary format.
 ---
 
 # doc-standards
 
-Documentation here is a knowledge graph, not a folder of files. Every document answers one question and links to the documents that answer the others. If two documents state the same thing, one of them is wrong.
+Documentation is a knowledge graph, not a folder of files: every document answers one question and links to the ones that answer the others. If two documents state the same thing, one of them is wrong.
 
 ## The tree
-
-Created by sdf-init, governed here:
 
     AGENTS.md                       how the agent works in this repo
     docs/
       glossary/glossary.md          what domain terms mean here
       architecture/
-        adr/                        decisions made (epoch-id named, see decisions skill)
-        rfcs/                       decisions being discussed (epoch-id named)
+        adr/                        accepted decisions (epoch-id named)
+        rfcs/                       decisions under discussion (epoch-id named)
+      design/                       what the system does today, one file per area
       conventions/                  per-area rules (frontend.md, testing.md, ...)
       plans/
-        active/<task-slug>/         spec.md + plan.md of running tasks
-        completed/                  moved here when a task reaches DONE
+        active/<id>-<slug>/         spec.md + plan.md of running tasks
+        completed/                  archived when a task reaches DONE
 
-Task slug: English kebab-case of the task subject.
+Task dirs: `<epoch-id>-<slug>` — the epoch id per the `sdf-decisions` naming rules, slug English kebab-case. Design files: `<area>.md`.
+
+THE TREE IS CLOSED: documentation exists ONLY in these locations, and every document answers exactly one row of the table below. NO new directories, NO loose .md files at the repository root or beside the code, NO files in a plan dir beyond spec.md and plan.md. Nothing fits → the document is not written — ASK the human. Only sdf-init creates and extends the tree; every other skill fills the listed places. The map stays complete only while the tree stays closed.
 
 ## Source of truth
 
@@ -33,37 +34,24 @@ Task slug: English kebab-case of the task subject.
 | What did we learn about the code? | Discovery in plan.md |
 | How do we build it? | plan.md |
 | Why is the system built this way? | ADR |
+| How does the system work today? | design |
 | What are we considering? | RFC |
 | How does the agent behave in this repo? | AGENTS.md |
 | What actually changed? | git |
 | Does it work? | tests |
 
-Copy nothing across rows. Link instead.
+Copy nothing across rows — link instead.
 
-## Linking rules
+## Linking
 
-- relative markdown links — they must resolve in editors, on the forge, and for the agent;
-- a plan links every ADR it depends on; the RFC ↔ ADR pair links both ways (Origin);
-- a spec links glossary terms instead of redefining them;
-- terminology changed → update the glossary, links follow;
-- a document that nothing links to and that answers no row above should probably not exist.
+Relative markdown links — they must resolve in editors, on the forge, and for the agent. A plan links every ADR it depends on; the RFC ↔ ADR pair links both ways; a spec links glossary terms instead of redefining them. Terminology changed → update the glossary; links follow.
 
-## Glossary entry format
+## Glossary entry
 
     ## <Term>
-    ### Definition
-    What it means in THIS project, not in general.
-    ### Not to be confused with
-    The near-terms (Registry vs Entity Reference Registry).
-    ### Used by
-    Features, pages, modules.
-    ### Related
-    ADR / RFC / plan links.
+    ### Definition               what it means in THIS project
+    ### Not to be confused with  the near-terms
+    ### Used by                  features, pages, modules
+    ### Related                  ADR / RFC / plan links
 
-Domain words are overloaded in every real project. The glossary pins the local meaning so the agent stops re-asking what "registry" means in this codebase.
-
-## Language
-
-AGENTS.md records the project's documentation language; default English. Code identifiers, commands, and paths stay as written.
-
-Event-driven upkeep: [maintenance.md](references/maintenance.md).
+AGENTS.md records the docs language; default English. Event-driven upkeep: [maintenance.md](references/maintenance.md).

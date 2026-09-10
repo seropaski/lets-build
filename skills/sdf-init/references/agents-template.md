@@ -22,7 +22,7 @@ Fill every `<...>` from detection. Keep the file short — it loads in every ses
     - docs language: <language>
 
     ## Before coding
-    1. Read the ADRs relevant to the area (docs/architecture/adr/).
+    1. Read the design doc and ADRs relevant to the area (docs/design/, docs/architecture/adr/).
     2. Read the task's spec.md and plan.md.
     3. Inspect existing implementations; extend before duplicating.
     4. No new architectural pattern without an RFC.
@@ -40,6 +40,7 @@ Fill every `<...>` from detection. Keep the file short — it loads in every ses
 
     ## Workflow
     - init — project setup (this file, docs tree)
+    - research — explores the code, writes current-state docs (docs/design/), glossary, conventions
     - plan — spec.md + plan.md before code
     - implement — milestone loop, writes progress back to plan.md
     - review — spec/plan/ADR compliance + code review
@@ -47,12 +48,14 @@ Fill every `<...>` from detection. Keep the file short — it loads in every ses
 
     ## Documentation rules
     Documents are linked, not duplicated: terminology → glossary,
-    decisions → ADR, task state → plan.md, changes → git.
+    decisions → ADR, current behavior → design, task state → plan.md,
+    changes → git. The docs tree is closed — no documents outside it.
     Link relatively. Update the source of truth, never a copy.
 
     ## Execution protocol
-    Any question, doubt, or ambiguity → stop and ask the human with 1–2 options
-    and a recommendation. Guessing is prohibited — for the agent and every subagent.
+    ANY information the request does not state explicitly → ASK THE HUMAN.
+    Guessing, assuming, and deciding silently are PROHIBITED — for the agent
+    and every subagent. Questions come with 1–2 options and a recommendation.
 
     ## Product context
     <human-owned: what this product is, who uses it, domain quirks>

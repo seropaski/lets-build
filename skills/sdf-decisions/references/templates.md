@@ -49,11 +49,12 @@
 ## Plan records
 
     DEC-01 — <decision, one line>
+      Answer: <the human's choice, verbatim> (Q-xx)
       Alternatives: <what else, why not>
       Risks: <what may break>
       Validation: <scenario / typecheck / manual check>
 
-A DEC without alternatives or validation is not a made decision — return it to the question loop.
+A DEC without an answer, alternatives, or validation is not a made decision — return it to the question loop.
 
     DEV-01 — <what changed vs the plan> (YYYY-MM-DD)
       Planned / Discovered / Changed / Reason / Impact
