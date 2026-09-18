@@ -78,4 +78,4 @@ Otherwise:
     ### Recommendation
     **APPROVE** | **APPROVE WITH SUGGESTIONS** | **NEEDS CHANGES**
 
-Write the FULL review before offering fixes. APPROVE with no issues → done. Otherwise offer fix options with modes: code (direct fixes), debug (investigate-first), orchestrator (5+ mixed issues). After an explicit fix request: fix only reviewed findings, in scope, run relevant verification, no unrelated changes.
+Write the FULL review before any fix talk. No findings at all → done, no question. Otherwise the run MUST end by ASKING the human what to fix and how — findings numbered, choices (all / by number / none) and modes: code (direct fixes), debug (investigate-first), orchestrator (5+ mixed issues), each with a recommendation from severity — then wait for the answer; an ignorable offer does not count. After the answer: fix only the chosen reviewed findings, in scope, run relevant verification, no unrelated changes.

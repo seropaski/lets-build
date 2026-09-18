@@ -58,4 +58,5 @@ Fill every `<...>` from detection. Keep the file short — it loads in every ses
     and every subagent. Questions come with 1–2 options and a recommendation.
 
     ## Product context
-    <human-owned: what this product is, who uses it, domain quirks>
+    <from the init interview, verbatim: what this product is, its goals,
+    who uses it, domain quirks — no placeholders; edit freely, never deleted>

@@ -8,11 +8,11 @@ Six public skills: init, research, plan, implement, review, ship. Four service s
 
     npx skills add seropaski/skills
 
-Then run `/sdf-init` once in the target repository — it creates the AGENTS.md and docs/ tree every other skill reads. Needs an agent with skills and subagent spawning, and git.
+Then run `/sdf-init` once in the target repository — it analyzes the project, interviews you, and creates the AGENTS.md and docs/ tree every other skill reads. Needs an agent with skills and subagent spawning, and git.
 
 ## The workflow
 
-    /sdf-init       once per repo — AGENTS.md, docs tree, glossary seed
+    /sdf-init       once per repo — analysis + interview → AGENTS.md, README, docs tree, glossary
       ↓
     /sdf-plan       <task> → spec.md + plan.md, status READY
       ↓
@@ -48,7 +48,7 @@ The tree is closed: documentation exists only in these places, and only sdf-init
 
 ## Usage
 
-**Set up.** `/sdf-init` detects the stack from manifests, creates the tree, seeds the glossary with real domain terms, reports the gaps. Existing files update in place; human prose stays untouched.
+**Set up.** `/sdf-init` analyzes the project — manifests, layering, domain vocabulary from routes, models, and UI sections — then stops and interviews you in small batches: product goals, users, domain areas, open gaps. The answers land verbatim in AGENTS.md's Product context, the glossary, conventions, and the README. Existing files update in place; human prose stays untouched.
 
 **Research.** `/sdf-research How does an order's status travel from the API to the UI?` — no code changes, no spec. Every claim is proven by a file path; the answer lands in docs/design/orders.md, new terms in the glossary, observed rules in conventions. Forks become RFCs put to you with a recommendation.
 
@@ -63,7 +63,7 @@ Numbered items become tracked requirements. The agent explores prior plans, reus
 
 **Implement.** `/sdf-implement orders-status-filter` — subagents write, validate, and review each milestone; the orchestrator never edits code. Progress, deviations (DEV), and new questions (Q) land in plan.md after every milestone. A blocked question flips its milestone to [!] and stops that thread while others continue. Re-run in any session: the plan is reconciled against the worktree and work resumes. Ends IN_REVIEW.
 
-**Review.** `/sdf-review` reviews uncommitted changes; `staged`, `branch main`, or a PR number works too. Compliance first (spec, plan, ADRs, design docs), then six code tracks — security, performance, business logic, deploy safety, duplication, dead code — on read-only subagents. Style is never flagged. Findings first, fixes only on request. No plan on the branch → code-only review, stated up front.
+**Review.** `/sdf-review` reviews uncommitted changes; `staged`, `branch main`, or a PR number works too. Compliance first (spec, plan, ADRs, design docs), then six code tracks — security, performance, business logic, deploy safety, duplication, dead code — on read-only subagents. Style is never flagged. No plan on the branch → code-only review, stated up front. Findings first; the run then asks you what to fix and how — which findings, which mode — and fixes start only on your answer.
 
 **Ship.** `/sdf-ship` commits and opens the MR/PR; `commit only` stops after the commit. Conventional message, secrets checked, hooks respected, forge auto-detected. On approval it closes the plan: DONE, archive to completed/, design docs updated.
 
@@ -81,7 +81,7 @@ Numbered items become tracked requirements. The agent explores prior plans, reus
 
 | Skill | Invoke when | Job |
 |---|---|---|
-| [sdf-init](skills/sdf-init/SKILL.md) | once per project | stack detection, AGENTS.md + docs tree, glossary seed |
+| [sdf-init](skills/sdf-init/SKILL.md) | once per project | project analysis, blocking interview, AGENTS.md + README + docs tree, glossary |
 | [sdf-research](skills/sdf-research/SKILL.md) | deliverable is understanding or docs | design docs, glossary, conventions — read-only toward code |
 | [sdf-plan](skills/sdf-plan/SKILL.md) | before any non-trivial change | requirements → discovery → questions → spec.md + plan.md, READY |
 | [sdf-implement](skills/sdf-implement/SKILL.md) | plan is READY | milestone loop via subagents, plan.md as live state |

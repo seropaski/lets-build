@@ -1,11 +1,11 @@
 ---
 name: sdf-review
-description: Two-layer review of a change — compliance with the task's spec, plan, and ADRs, then a high-confidence code review across six tracks (security, performance, business logic, deploy safety, duplication, dead code). Advisory; no edits until the full review is written and the human asks for fixes. Optional input names a scope word, commit, branch, or PR; empty input reviews uncommitted changes.
+description: Two-layer review of a change — compliance with the task's spec, plan, and ADRs, then a high-confidence code review across six tracks (security, performance, business logic, deploy safety, duplication, dead code). Advisory — the full review is written first, then the agent must ask the human what to fix and how; no edits before the answer. Optional input names a scope word, commit, branch, or PR; empty input reviews uncommitted changes.
 ---
 
 # review
 
-Advisory by default: the complete review first, fix offers after. Never flag outside the layers and tracks below. Prefer no finding over a weak finding.
+Advisory by default: the complete review first, then the mandatory fix question. Never flag outside the layers and tracks below. Prefer no finding over a weak finding.
 
 ## Layer 0 — context
 
@@ -21,7 +21,7 @@ Attribute the change: match the current branch's slug against the docs/plans/act
 
 ## Output
 
-Compliance verdicts first (PASS / FAIL per layer, the violated record named as R# / DEC# / ADR), then the code review in the standard format. Fix offers come after the full text, each naming its mode: code / debug / orchestrator (5+ mixed issues). After an explicit fix request: fix only the reviewed findings, in scope, then verify. No opportunistic refactors.
+Compliance verdicts first (PASS / FAIL per layer, the violated record named as R# / DEC# / ADR), then the code review in the standard format. Findings present → the run MUST close with a question to the human: what to fix and how. Number the findings, ask which to fix (all / by number / none) and the mode — code / debug / orchestrator (5+ mixed issues) — with a recommendation from severity, then WAIT for the answer. An ignorable offer ("I can fix these if you want") does not satisfy this — the question is asked, not offered. After the answer: fix only the chosen reviewed findings, in scope, then verify. No opportunistic refactors. No findings at all → done, no question.
 
 ## Closing
 
