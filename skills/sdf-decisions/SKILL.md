@@ -1,40 +1,50 @@
 ---
 name: sdf-decisions
-description: Service skill — loaded by sdf-plan, sdf-research, sdf-implement, and sdf-review; not invoked by the user. Decision levels, the question ladder (the human resolves every question), the RFC and ADR lifecycle, and epoch-based document naming.
+description: Service skill, loaded by lets-plan, lets-research, lets-implement, and lets-review; not invoked by the user. Decision levels, the question ladder, the RFC and ADR lifecycle, and epoch-based document naming.
 ---
 
-# decisions
+# sdf-decisions
 
-ONLY THE HUMAN RESOLVES A QUESTION — information the request, the code, or a linked document does not state explicitly is asked about, never assumed. This skill supplies the machinery. Full rules: [decision-rules.md](references/decision-rules.md). Formats: [templates.md](references/templates.md).
-
-## Levels
-
-- **L1 — what the code dictates.** Variable names, function splitting, equivalent forms. Execution, not a decision. The label never hides a question: two options implying different behavior for the user are L2.
-- **L2 — task-scoped.** "Reuse the existing DataTable". Put to the human with alternatives; stored as a DEC record tracing to the answer.
-- **L3 — architectural.** Binds future work: a shared abstraction, a new data flow, a heavyweight dependency. Route: RFC → human decision → ADR → plan links the ADR.
-
-Test: would a future engineer ask "why is it built this way?" → L2 at least; L3 if the answer constrains other features.
+The human makes every decision that the code and the docs don't already make. This skill says how to tell the two apart, how to ask, and where the answer goes. Full rules: [references/decision-rules.md](references/decision-rules.md). Formats: [references/templates.md](references/templates.md).
 
 ## Question ladder
 
-1. Does the existing code answer it? Read and move on.
-2. Does the request, spec, contract, or an ADR answer it? Take it from there.
-3. Ask the human — the only remaining step. Q record in plan.md; BLOCKED if milestones wait on it. Reversibility changes the cost of a wrong guess, not the right to guess.
+Climb it for every open point, in order:
 
-## RFC — a question put to the human
+1. The existing code answers it. Read it and move on.
+2. The request, the spec, a contract, or an ADR answers it. Take the answer from there.
+3. Nothing does. Ask the human and record a Q in plan.md. Milestones that wait on it get [!].
 
-Drafted the moment an L3 fork appears: problem, options, trade-offs, a recommendation with a stance. Decided → write the ADR; the RFC takes its final status and links it. Deferred → Q record; dependent milestones blocked. Rejected with a direction → the direction constrains the plan; if itself L3, it gets the ADR.
+Only step 3 is a question. A point that is cheap to undo is still asked: reversibility lowers the cost of a wrong guess, it doesn't make guessing allowed.
 
-## ADR — a decision already made
+Ask in small batches grouped by topic. Number each question and give one or two options plus your recommendation. An architectural fork goes alone. The answer goes into plan.md word for word.
 
-Written at acceptance — never speculatively, never after the code silently committed everyone. Context, decision, alternatives, consequences, Origin link to the RFC. A mid-build L3 discovery (sdf-implement) runs the same loop: RFC → human → ADR → plan updated with a DEV record.
+## Levels
+
+- **L1, what the code dictates.** Variable names, how a function splits, equivalent forms. This is execution, not a decision. If two options would behave differently for the user, it is L2, whatever it looks like.
+- **L2, task-scoped.** "Reuse the existing DataTable." Put it to the human with the alternatives and record a DEC that cites the answer.
+- **L3, architectural.** It binds future work: a shared abstraction, a new data flow, a heavy dependency. It goes through an RFC, the human's decision, and an ADR, and the plan links the ADR.
+
+A quick test: if a future engineer would ask "why is it built this way?", it is at least L2. If the answer limits other features, it is L3.
+
+## RFC: a question put to the human
+
+Draft one as soon as an L3 fork appears: the problem, the options, the trade-offs, and a recommendation that takes a side. When the human decides, write the ADR, give the RFC its final status, and link the two. When the human defers, record a BLOCKED Q and mark the milestones that depend on it [!]. When the human rejects every option but names a direction, that direction constrains the plan, and it gets its own ADR if it is L3 itself.
+
+## ADR: a decision already made
+
+Written when the human accepts, not before, and not after the code has quietly committed everyone to it. It holds the context, the decision, the alternatives, the consequences, and a link back to the RFC. An L3 discovery during implementation runs the same loop and adds a DEV record to the plan.
+
+Every new RFC or ADR, and every status change, also updates the row in `rfcs/_index.md` or `adr/_index.md` (format: the `sdf-doc-standards` formats reference). Before writing a new one, read the index: the question may already have an answer.
+
+A decision that sets a rule for how code is written from now on ("all dates go through formatDate") is also a convention. Propose it for docs/conventions/ and write it only after the human approves, per `sdf-doc-standards`.
 
 ## Naming
 
-Globally numbered documents and task dirs take an epoch-milliseconds id — counters collide across machines, epochs do not:
+RFCs, ADRs, and task dirs get an epoch-milliseconds id. Counters collide when two people plan on two machines; millisecond timestamps practically never do.
 
-    docs/architecture/rfc/1786584699364-entity-reference-registry.md
+    docs/architecture/rfcs/1786584699364-entity-reference-registry.md
     docs/architecture/adr/1786584701127-server-state-management.md
     docs/plans/active/1786584705221-orders-status-filter/
 
-Task-local counters (UC, DEC, DEV, Q) stay per-file. Generation commands and collision handling: [decision-rules.md](references/decision-rules.md).
+UC, DEC, DEV, and Q counters stay local to their file. How to generate the id: [references/decision-rules.md](references/decision-rules.md).

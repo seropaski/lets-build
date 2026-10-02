@@ -1,6 +1,6 @@
 # spec.md template
 
-The spec says what to do. The plan says how. Requirements stay verbatim — the implementer reads them as the contract. Docs language comes from AGENTS.md, default English.
+The spec says what to do; the plan says how. Requirements stay word for word, because the implementer reads them as the contract. The docs language comes from AGENTS.md; the default is English.
 
     # <Task title>
 
@@ -9,7 +9,7 @@ The spec says what to do. The plan says how. Requirements stay verbatim — the 
 
     ## Objective
     One paragraph: what this delivers and why it matters now.
-    No solution talk — that lives in the plan.
+    No solution talk; that lives in the plan.
 
     ## Requirements
     Verbatim from the requester, numbered R1, R2, ...; sub-items stay under
@@ -21,15 +21,15 @@ The spec says what to do. The plan says how. Requirements stay verbatim — the 
     hides them.
 
     ## Acceptance scenarios
-    Manually checkable; minimum one per requirement and one per risky decision:
+    Checkable by hand; at least one per requirement and one per risky decision:
 
     - IF <condition / action>, THEN <observable result>.
 
     ## Out of scope
-    Explicit boundaries: pre-existing behavior not to touch, features
-    consciously dropped.
+    Explicit boundaries: existing behavior not to touch, features
+    deliberately dropped.
 
     ## Coverage
     | R# | UC | Scenarios | Milestone |
-    Filled during drafting; every R# must reach a milestone through at least
+    Filled in while drafting. Every R# reaches a milestone through at least
     one UC and one scenario.
