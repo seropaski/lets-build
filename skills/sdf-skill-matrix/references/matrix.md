@@ -1,6 +1,6 @@
 # Capability areas
 
-The left column is a task trigger; the right says what a matching skill should cover. The mapping to concrete skill names happens against the current environment (see SKILL.md) — this table intentionally contains no skill names.
+The left column is what in a task calls for the area; the right column says what a matching skill should cover. Concrete skill names come from the current environment (see SKILL.md), so this table deliberately has none.
 
 | Area (task trigger) | A matching skill covers |
 |---|---|

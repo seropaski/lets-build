@@ -1,30 +1,40 @@
 ---
 name: sdf-orchestration
-description: Service skill — loaded by sdf-plan, sdf-research, sdf-implement, and sdf-review; not invoked by the user. Subagent roles (explorer, implementer, validator, reviewer), self-contained dispatch prompts, the validate/review cycle, rework limits, and what the orchestrator never does itself.
+description: Service skill, loaded by lets-plan, lets-research, lets-implement, and lets-review; not invoked by the user. Subagent roles (explorer, implementer, validator, reviewer), self-contained dispatch prompts, how subagents ask questions, the validate and review cycle, rework limits, and what the orchestrator never does itself.
 ---
 
-# orchestration
+# sdf-orchestration
 
-The orchestrator runs the process and talks to the human; its own session stays clean — process and communication only. Every hands-on artifact, a one-line fix included, is a subagent dispatch. It writes no production code, validates nothing, reviews nothing. Templates and checklists: [protocol.md](references/protocol.md).
+The orchestrator runs the process and talks to the human. Subagents write, check, and review the code, each in a fresh context, so the orchestrator's session stays small and nobody grades their own work. The orchestrator writes only process records: plan.md, spec.md, and the documents its calling skill gives it. The glossary and the conventions it writes only after the human approves the exact text, per `sdf-doc-standards`; subagents only propose changes to them. Every code change is a dispatch, a one-line fix included. Templates and checklists: [references/protocol.md](references/protocol.md).
 
 ## Roles
 
 | Role | Does | Never |
 |---|---|---|
 | Explorer | read-only investigation of one assigned area; reports findings with file:line evidence | edits, makes decisions |
-| Implementer | writes exactly one task, runs the project's checks, fixes its own failures before reporting | declares done without checks, expands scope |
+| Implementer | writes exactly one task, runs the project's checks, fixes its own failures before reporting | declares done without checks, widens the scope |
 | Validator | checks one dispatch: diff scope, conventions, typecheck, runnable scenarios | edits code |
 | Reviewer | audits a milestone diff against the plan: traceability, reuse, minimalism | edits code |
 
-The author never validates or reviews their own work; no agent holds two roles.
+The author of a change never validates or reviews it, and no agent holds two roles.
+
+## Questions
+
+Subagents don't talk to the human. When a subagent hits something that the task, the code, and the docs don't answer, it stops and returns the question with what it found, one or two options, and a recommendation. The orchestrator puts it to the human per the `sdf-decisions` question ladder and dispatches again with the answer.
 
 ## Dispatch prompts
 
-A subagent sees neither the plan nor the orchestrator's context. Every prompt carries: scope (the task verbatim, with R# / UC# / DEC# trace), context (stack facts, patterns, fixtures), conventions (from AGENTS.md), skills to load first (from the plan's skill table), the four binding principles, the execution protocol (any doubt → come back with a question, never guess), bans (no commits, no files outside the task), and the report format. Template: [protocol.md](references/protocol.md).
+A subagent sees neither the plan nor the orchestrator's context, so the prompt has to carry everything it needs. The template in [references/protocol.md](references/protocol.md) lists what that is; leave nothing out, the trust rule included.
 
 ## Cycle
 
     mini-plan → implementer → validator → reviewer
       → [rework → validator → reviewer]* → accept → update plan → next
 
-Mini-plan before every milestone: files, dispatch order, validation commands, exit criteria. Parallelize by default — tasks with disjoint file sets and closed dependencies dispatch together, each implementer with its own validator. Rework is a new dispatch with a concrete defect list ("try better" is not one); limit 2 rounds per defect, then stop and offer the human 1–2 options. Scenarios that cannot run yet go on the deferred list with their unlocking milestone — they surface at the final gate, never dropped silently.
+Before every milestone, write a mini-plan: files, dispatch order, validation commands, exit criteria. Parallelize by default: tasks with disjoint file sets and finished dependencies go out together, each implementer with its own validator. Parallel tasks share one worktree, so give each validator its own task's file list and those of the other running tasks. A typecheck error in another task's files is reported but not counted against this one.
+
+Rework is a new dispatch with a concrete defect list; "try harder" is not a defect list. Each defect gets two rounds at most. After that, stop and give the human one or two options with a recommendation. A scenario that can't run yet goes on the Deferred scenarios list in plan.md with the milestone that unlocks it, so it comes back at the final gate instead of getting lost.
+
+## Without subagents
+
+If the run needs subagents and the agent can't spawn them, tell the human before starting. One agent playing every role loses the independent check this workflow is built on. Go ahead that way only on the human's explicit yes, and note it in plan.md Progress.

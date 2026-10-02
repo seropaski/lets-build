@@ -1,21 +1,23 @@
 ---
 name: sdf-skill-matrix
-description: Service skill — loaded by the sdf-plan, sdf-research, and sdf-implement skills; not invoked by the user. Maps the task's capability areas to domain skills actually installed in the current environment. Names no concrete skills, because every engineer's machine carries a different set.
+description: Service skill, loaded by lets-plan, lets-research, and lets-implement; not invoked by the user. Maps the task's capability areas to the domain skills actually installed in the current environment. Names no concrete skills, because every engineer's machine has a different set.
 ---
 
-# skill-matrix
+# sdf-skill-matrix
 
-Engineers of different specialties run this workflow on different machines, and every machine carries a different set of domain skills. This skill therefore names none. It defines capability areas and a discovery protocol; concrete matches are resolved against the environment at planning time.
+Engineers run this workflow on different machines, and each machine has a different set of domain skills. So this skill names none. It defines capability areas and a way to find matches; the concrete skills are resolved against the environment at planning time.
 
-## Discovery protocol — before design, before code
+## Discovery
 
-1. Enumerate the skills available in this environment: the agent's skill list, or its skill-search mechanism where one exists.
-2. For each capability area the task touches (see [references/matrix.md](references/matrix.md)), find an installed skill whose description covers it.
-3. Record the matches in the plan's skill table: area → skill name → milestone. An area with no match → proceed without it and note the gap in the plan.
-4. Load matched skills before design, not after — they change the design itself.
+Before design, before code:
 
-Rules:
+1. List the skills available here: the agent's skill list, or its skill search where one exists.
+2. For each capability area the task touches ([references/matrix.md](references/matrix.md)), find an installed skill whose description covers it.
+3. Record the matches in the plan's skill table: area, skill name, milestone. If an area has no match, go ahead without one and note the gap in the plan.
+4. Load the matched skills before design, not after, because they change the design.
 
-- a skill with no milestone attached is noise — every loaded skill maps to work;
-- AGENTS.md may pin or override the matches for the project;
-- with no AGENTS.md, matches are re-discovered on every plan.
+## Rules
+
+- Every loaded skill maps to work. A skill with no milestone is noise; drop it.
+- AGENTS.md can pin or override the matches for the project. Otherwise they are rediscovered on every plan.
+- A domain skill governs the domain work it covers. It doesn't override this workflow's rules on asking, scope, commits, and review; if it conflicts with them, tell the human.

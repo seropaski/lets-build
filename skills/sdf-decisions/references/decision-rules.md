@@ -1,38 +1,38 @@
 # Decision rules
 
-## RFC criteria — any one is enough
+## When an RFC is needed
 
-- two or more viable architectural approaches exist;
-- the choice outlives the task: other features will have to comply;
-- reversing it after implementation costs more than deciding now;
-- existing ADRs are silent on the problem, or the task conflicts with one.
+Any one of these is enough:
 
-No RFC for small implementation choices. A rejected RFC is a normal, useful outcome — it records why a path was closed.
+- two or more workable architectural approaches exist;
+- the choice outlives the task, and other features will have to follow it;
+- undoing it after implementation costs more than deciding now;
+- the ADRs say nothing about the problem, or the task conflicts with one.
+
+Small implementation choices don't get an RFC. A rejected RFC is a normal result: it records why a path was closed.
 
 ## ADR rules
 
-- written only after an explicit human acceptance;
-- precise enough to build from without re-reading the RFC;
-- consequences name what future work must now comply with;
-- superseding: the new ADR links the old one, the old ADR's status becomes `Superseded by <id>`.
+- Written only after the human explicitly accepts.
+- Precise enough to build from without rereading the RFC.
+- The consequences name what future work must now comply with.
+- To supersede an ADR, the new one links the old one, and the old one's status becomes `Superseded by <id>`.
 
-## Naming
+## Generating the id
 
-Epoch milliseconds + kebab-case slug:
+Use the first command that works:
 
-    docs/architecture/adr/<id>-<slug>.md
-    docs/architecture/rfc/<id>-<slug>.md
+    node -e 'console.log(Date.now())'
+    python3 -c 'import time; print(time.time_ns() // 10**6)'
+    date +%s%3N        # GNU date only
 
-Generate `<id>` with whichever is available:
+Check that the result is 13 digits. BSD date on macOS doesn't support `%N` and prints something like `17909077363N` without any error.
 
-    date +%s%3N                                                # GNU/Linux
-    python3 -c 'import time; print(time.time_ns() // 10**6)'   # python3
-    node -e 'console.log(Date.now())'                          # node
+The slug is English kebab-case of the subject. If two documents ever get the same id, git reports a filename conflict at merge time and one side regenerates, so the failure shows itself.
 
-Sequence numbers (`adr-001`) collide as soon as two people plan on two machines. Milliseconds do not, for practical purposes. If two documents ever do land on the same id, git reports the filename conflict at merge time and one side regenerates — the failure is self-reporting, not silent. Slug: English kebab-case of the subject.
+## Status vocabulary
 
-## Status vocab
-
-- RFC: `Proposed` → `Accepted` | `Rejected` | `Deferred`; later possibly `Superseded by <id>`.
+- RFC: `Proposed`, then `Accepted`, `Rejected`, or `Deferred`; later possibly `Superseded by <id>`.
 - ADR: `Accepted`; later possibly `Superseded by <id>`.
-- plan records: `DEC-xx` (L2 decisions), `DEV-xx` (deviations), `Q-xx` (questions, status OPEN | BLOCKED | RESOLVED).
+- Q in plan.md: `OPEN` (asked, no answer yet), `BLOCKED` (milestones wait on it, including a question the human chose to defer), `RESOLVED` (answered).
+- DEC-xx records an L2 decision; DEV-xx records a deviation from the plan.
