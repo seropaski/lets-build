@@ -1,9 +1,10 @@
 ---
-name: sdf-skill-matrix
+name: lets-skill-matrix
+user-invocable: false
 description: Service skill, loaded by lets-plan, lets-research, and lets-implement; not invoked by the user. Maps the task's capability areas to the domain skills actually installed in the current environment. Names no concrete skills, because every engineer's machine has a different set.
 ---
 
-# sdf-skill-matrix
+# lets-skill-matrix
 
 Engineers run this workflow on different machines, and each machine has a different set of domain skills. So this skill names none. It defines capability areas and a way to find matches; the concrete skills are resolved against the environment at planning time.
 

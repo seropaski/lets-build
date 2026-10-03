@@ -1,4 +1,4 @@
-# seropaski/skills
+# 🏗️ Let's Build
 
 Engineering workflow skills for AI coding agents. Tasks run through living documents — spec, plan, ADR, RFC, design — stored in the repository itself. A new session resumes from the repo, not from chat memory.
 
@@ -6,7 +6,7 @@ Six public skills: init, research, plan, implement, review, ship. Four service s
 
 ## Install
 
-    npx skills add seropaski/skills
+    npx skills add seropaski/lets-build
 
 Then run `/lets-init` once in the target repository. It analyzes the project, interviews you, and creates the AGENTS.md and docs/ tree that every other skill reads. You need git and an agent that supports skills and subagents. Claude Code reads CLAUDE.md rather than AGENTS.md, so init offers a one-line CLAUDE.md that imports it.
 
@@ -93,10 +93,10 @@ Numbered items become tracked requirements. The agent explores prior plans, reus
 
 | Skill | Loaded by | Job |
 |---|---|---|
-| [sdf-decisions](skills/sdf-decisions/SKILL.md) | plan, research, implement, review | decision levels, question ladder, RFC/ADR lifecycle, epoch naming |
-| [sdf-doc-standards](skills/sdf-doc-standards/SKILL.md) | every skill | closed docs tree with _index.md files, source-of-truth map, domain-model and convention formats, approval rule, trust rule, discovery protocol |
-| [sdf-orchestration](skills/sdf-orchestration/SKILL.md) | plan, research, implement, review | subagent roles (explorer included), dispatch prompts, validate/review cycle |
-| [sdf-skill-matrix](skills/sdf-skill-matrix/SKILL.md) | plan, research, implement | capability areas → installed domain skills |
+| [lets-decisions](skills/lets-decisions/SKILL.md) | plan, research, implement, review | decision levels, question ladder, RFC/ADR lifecycle, epoch naming |
+| [lets-doc-standards](skills/lets-doc-standards/SKILL.md) | every skill | closed docs tree with _index.md files, source-of-truth map, domain-model and convention formats, approval rule, trust rule, discovery protocol |
+| [lets-orchestration](skills/lets-orchestration/SKILL.md) | plan, research, implement, review | subagent roles (explorer included), dispatch prompts, validate/review cycle |
+| [lets-skill-matrix](skills/lets-skill-matrix/SKILL.md) | plan, research, implement | capability areas → installed domain skills |
 
 ## How it compares
 

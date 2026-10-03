@@ -1,15 +1,15 @@
 {
-  "name": "skills",
+  "name": "lets-build",
   "version": "0.0.0",
   "private": true,
-  "description": "",
-  "homepage": "https://github.com/seropaski/skills#readme",
+  "description": "Spec-driven workflow for coding agents: init, research, plan, implement, review, ship.",
+  "homepage": "https://github.com/seropaski/lets-build#readme",
   "bugs": {
-    "url": "https://github.com/seropaski/skills/issues"
+    "url": "https://github.com/seropaski/lets-build/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/seropaski/skills.git"
+    "url": "https://github.com/seropaski/lets-build.git"
   },
   "license": "MIT",
   "author": "Sergei Vysotskii"

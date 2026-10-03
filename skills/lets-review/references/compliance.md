@@ -21,7 +21,7 @@ For each R#: where does the diff implement it, and which scenario proves it? If 
 - Milestones marked [x] match real, complete work.
 - The strategy was followed. If a different approach was taken, check for a DEV record: an undocumented deviation is a defect; a documented one gets its impact statement checked.
 - DEC decisions hold in the code. A DEC that says "reuse X" while the code builds Y is a deviation.
-- A decision visible in the diff with no DEC, Q, ADR, or DEV behind it is a blocker. It becomes a question for the human, per the `sdf-decisions` ladder.
+- A decision visible in the diff with no DEC, Q, ADR, or DEV behind it is a blocker. It becomes a question for the human, per the `lets-decisions` ladder.
 - The four principles hold in the diff: think before coding (nothing invented beyond the spec), surgical (no edits beyond the plan's tasks), simplicity first (nothing speculative or single-use), goal-driven (every change serves a requirement or a decision).
 
 ## Architecture

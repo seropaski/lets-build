@@ -1,9 +1,10 @@
 ---
-name: sdf-decisions
+name: lets-decisions
+user-invocable: false
 description: Service skill, loaded by lets-plan, lets-research, lets-implement, and lets-review; not invoked by the user. Decision levels, the question ladder, the RFC and ADR lifecycle, and epoch-based document naming.
 ---
 
-# sdf-decisions
+# lets-decisions
 
 The human makes every decision that the code and the docs don't already make. This skill says how to tell the two apart, how to ask, and where the answer goes. Full rules: [references/decision-rules.md](references/decision-rules.md). Formats: [references/templates.md](references/templates.md).
 
@@ -35,9 +36,9 @@ Draft one as soon as an L3 fork appears: the problem, the options, the trade-off
 
 Written when the human accepts, not before, and not after the code has quietly committed everyone to it. It holds the context, the decision, the alternatives, the consequences, and a link back to the RFC. An L3 discovery during implementation runs the same loop and adds a DEV record to the plan.
 
-Every new RFC or ADR, and every status change, also updates the row in `rfcs/_index.md` or `adr/_index.md` (format: the `sdf-doc-standards` formats reference). Before writing a new one, read the index: the question may already have an answer.
+Every new RFC or ADR, and every status change, also updates the row in `rfcs/_index.md` or `adr/_index.md` (format: the `lets-doc-standards` formats reference). Before writing a new one, read the index: the question may already have an answer.
 
-A decision that sets a rule for how code is written from now on ("all dates go through formatDate") is also a convention. Propose it for docs/conventions/ and write it only after the human approves, per `sdf-doc-standards`.
+A decision that sets a rule for how code is written from now on ("all dates go through formatDate") is also a convention. Propose it for docs/conventions/ and write it only after the human approves, per `lets-doc-standards`.
 
 ## Naming
 
