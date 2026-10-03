@@ -1,6 +1,6 @@
 {
   "name": "lets-build",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "description": "Spec-driven workflow for coding agents: init, research, plan, implement, review, ship.",
   "homepage": "https://github.com/seropaski/lets-build#readme",
