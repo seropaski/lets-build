@@ -30,7 +30,7 @@ Before designing anything new, look for what exists: similar components, hooks, 
 
 ## 5. Deep exploration
 
-For medium tasks and larger, dispatch read-only explorer subagents in parallel, one per independent area: touched files, patterns, data contracts, change boundaries. The role contract is in the `sdf-orchestration` skill. A small isolated edit doesn't need one.
+For medium tasks and larger, dispatch read-only explorer subagents in parallel, one per independent area: touched files, patterns, data contracts, change boundaries. The role contract is in the `lets-orchestration` skill. A small isolated edit doesn't need one.
 
 ## 6. Claim check
 

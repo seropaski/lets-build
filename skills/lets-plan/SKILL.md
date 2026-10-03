@@ -24,15 +24,15 @@ If the task dir already exists, ask whether to reopen it (status back to PLANNIN
 
 ## 1. Ground and discover
 
-Read AGENTS.md. If it's missing, stop and suggest `/lets-init`. Load the `sdf-doc-standards` skill and run its discovery protocol (references/discovery.md): the glossary, the ADRs and design docs for the affected areas, prior plans, the reuse sweep, and explorer subagents for medium tasks and up. Verify every claim the user makes about the code; if the code disagrees, stop and show both sides. Then match the capability areas to installed skills per `sdf-skill-matrix`, and load the matches before designing.
+Read AGENTS.md. If it's missing, stop and suggest `/lets-init`. Load the `lets-doc-standards` skill and run its discovery protocol (references/discovery.md): the glossary, the ADRs and design docs for the affected areas, prior plans, the reuse sweep, and explorer subagents for medium tasks and up. Verify every claim the user makes about the code; if the code disagrees, stop and show both sides. Then match the capability areas to installed skills per `lets-skill-matrix`, and load the matches before designing.
 
 ## 2. Questions and decisions
 
-Load `sdf-decisions` and climb its question ladder for every open point. What the code dictates is execution. L2 choices go to the human and become DEC records that cite the answer. L3 forks become RFCs with a recommendation, and a decided RFC becomes an ADR that the plan links.
+Load `lets-decisions` and climb its question ladder for every open point. What the code dictates is execution. L2 choices go to the human and become DEC records that cite the answer. L3 forks become RFCs with a recommendation, and a decided RFC becomes an ADR that the plan links.
 
 Ask the way the ladder describes, batching by topic: data contracts, UX states, scope, ambiguity. The answers go into plan.md word for word, because the implementer treats them as the source of truth. Even a task that looks clear puts its one to three riskiest assumptions to the human. If the human defers a question, record it as BLOCKED with "deferred by the human" and mark its milestones [!]. Keep asking until no question is OPEN.
 
-Two kinds of answers also change shared docs, and both need the human's approval of the exact text (`sdf-doc-standards`):
+Two kinds of answers also change shared docs, and both need the human's approval of the exact text (`lets-doc-standards`):
 
 - a term the task introduces, renames, or gives a new meaning: propose its glossary entry;
 - a DEC that sets a rule for code from now on: propose the convention.

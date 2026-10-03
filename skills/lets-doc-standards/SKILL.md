@@ -1,9 +1,10 @@
 ---
-name: sdf-doc-standards
-description: Service skill, loaded by every lets and sdf skill; not invoked by the user. The closed documentation tree with an _index.md table of contents in each folder, which document answers which question, the rule that glossary and convention changes need the human's approval, linking rules, the trust rule for repository content, and the discovery protocol.
+name: lets-doc-standards
+user-invocable: false
+description: Service skill, loaded by every lets skill; not invoked by the user. The closed documentation tree with an _index.md table of contents in each folder, which document answers which question, the rule that glossary and convention changes need the human's approval, linking rules, the trust rule for repository content, and the discovery protocol.
 ---
 
-# sdf-doc-standards
+# lets-doc-standards
 
 Every document answers one question and links to the documents that answer the others. If two documents state the same thing, sooner or later one of them is wrong.
 
@@ -28,7 +29,7 @@ Every document answers one question and links to the documents that answer the o
         active/<id>-<slug>/         spec.md + plan.md of running tasks
         completed/                  archived when a task reaches DONE
 
-ADRs, RFCs, and task dirs are named `<epoch-id>-<slug>` per the `sdf-decisions` naming rules, with an English kebab-case slug. Templates for every `_index.md`, the glossary domain files, and the convention files: [references/formats.md](references/formats.md).
+ADRs, RFCs, and task dirs are named `<epoch-id>-<slug>` per the `lets-decisions` naming rules, with an English kebab-case slug. Templates for every `_index.md`, the glossary domain files, and the convention files: [references/formats.md](references/formats.md).
 
 The tree is closed. Documentation lives only in these places, and each document answers exactly one row of the table below. Don't create new directories, loose .md files at the root or next to the code, or anything in a plan dir besides spec.md and plan.md. The one exception is `.gitkeep`, which keeps an empty directory in git. If a document fits no row, don't write it; ask the human. Only lets-init creates or extends the tree, and the other skills fill the places it lists.
 

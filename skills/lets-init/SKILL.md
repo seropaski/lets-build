@@ -5,7 +5,7 @@ description: Set up a repository for the spec-driven workflow. Analyzes the proj
 
 # lets-init
 
-A one-time setup so the other skills work from the repository instead of from session memory. Two phases, in order: analyze the code, then interview the human. Files are written from both, never from placeholders. The result is AGENTS.md and the README at the root, plus the docs tree from the `sdf-doc-standards` skill. AGENTS.md shape: [references/agents-template.md](references/agents-template.md).
+A one-time setup so the other skills work from the repository instead of from session memory. Two phases, in order: analyze the code, then interview the human. Files are written from both, never from placeholders. The result is AGENTS.md and the README at the root, plus the docs tree from the `lets-doc-standards` skill. AGENTS.md shape: [references/agents-template.md](references/agents-template.md).
 
 ## 0. Survey
 
@@ -41,18 +41,18 @@ Ground every question in the analysis ("routes /orders and /fulfillment found â€
 
 ## 3. Create the tree
 
-Create the missing parts of the tree from `sdf-doc-standards` and keep what exists. Every docs folder except plans/ gets its `_index.md`, empty tables included. Put a `.gitkeep` in plans/active/ and plans/completed/, or git drops them. docs/design/ gets only its index, because filling it is `lets-research`'s job.
+Create the missing parts of the tree from `lets-doc-standards` and keep what exists. Every docs folder except plans/ gets its `_index.md`, empty tables included. Put a `.gitkeep` in plans/active/ and plans/completed/, or git drops them. docs/design/ gets only its index, because filling it is `lets-research`'s job.
 
 If the repo has an old flat `docs/glossary/glossary.md`, propose splitting it into domain files plus `_index.md`, and do it only on the human's approval.
 
 ## 4. Propose the glossary and conventions
 
-Draft them from the analysis and the answers, in the formats from `sdf-doc-standards`:
+Draft them from the analysis and the answers, in the formats from `lets-doc-standards`:
 
 - glossary: the domain map for `_index.md`, then one domain file per domain with its terms;
 - conventions: a `docs/conventions/<area>.md` only where the repo shows a rule or the human stated one, plus its `_index.md` row. No filler files.
 
-Then show the drafts and get the human's approval, per the approval rule in `sdf-doc-standards`. Answers in the interview are the material, not the approval: the human approves the written text. Write only what was approved; a rejected entry is left out and listed in the report.
+Then show the drafts and get the human's approval, per the approval rule in `lets-doc-standards`. Answers in the interview are the material, not the approval: the human approves the written text. Write only what was approved; a rejected entry is left out and listed in the report.
 
 ## 5. Write AGENTS.md and the README
 

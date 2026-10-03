@@ -47,7 +47,7 @@
     ## Decisions
     DEC-01 — <decision>
       Answer: <the human's choice, verbatim> (Q-xx)
-      Alternatives / Risks / Validation        (format: sdf-decisions)
+      Alternatives / Risks / Validation        (format: lets-decisions)
 
     ## Deviations
     DEV-01 — <what changed vs the plan>
