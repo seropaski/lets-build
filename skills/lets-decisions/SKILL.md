@@ -38,14 +38,14 @@ Written when the human accepts, not before, and not after the code has quietly c
 
 Every new RFC or ADR, and every status change, also updates the row in `rfcs/_index.md` or `adr/_index.md` (format: the `lets-doc-standards` formats reference). Before writing a new one, read the index: the question may already have an answer.
 
-A decision that sets a rule for how code is written from now on ("all dates go through formatDate") is also a convention. Propose it for docs/conventions/ and write it only after the human approves, per `lets-doc-standards`.
+A decision that sets a rule for how code is written from now on ("all dates go through formatDate") is also a convention. Propose it for `<docs-root>/conventions/` and write it only after the human approves, per `lets-doc-standards`.
 
 ## Naming
 
 RFCs, ADRs, and task dirs get an epoch-milliseconds id. Counters collide when two people plan on two machines; millisecond timestamps practically never do.
 
-    docs/architecture/rfcs/1786584699364-entity-reference-registry.md
-    docs/architecture/adr/1786584701127-server-state-management.md
-    docs/plans/active/1786584705221-orders-status-filter/
+    <docs-root>/architecture/rfcs/1786584699364-entity-reference-registry.md
+    <docs-root>/architecture/adr/1786584701127-server-state-management.md
+    <docs-root>/plans/active/1786584705221-orders-status-filter/
 
 UC, DEC, DEV, and Q counters stay local to their file. How to generate the id: [references/decision-rules.md](references/decision-rules.md).

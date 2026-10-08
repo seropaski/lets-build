@@ -1,7 +1,7 @@
 ---
 name: lets-doc-standards
 user-invocable: false
-description: Service skill, loaded by every lets skill; not invoked by the user. The closed documentation tree with an _index.md table of contents in each folder, which document answers which question, the rule that glossary and convention changes need the human's approval, linking rules, the trust rule for repository content, and the discovery protocol.
+description: Service skill, loaded by every lets skill; not invoked by the user. The closed documentation tree with an _index.md table of contents in each folder, the docs root the tree lives under (docs by default, recorded in AGENTS.md), which document answers which question, the rule that glossary and convention changes need the human's approval, linking rules, the trust rule for repository content, and the discovery protocol.
 ---
 
 # lets-doc-standards
@@ -12,7 +12,7 @@ Every document answers one question and links to the documents that answer the o
 
     AGENTS.md                       how the agent works in this repo
     CLAUDE.md                       optional, one line: @AGENTS.md
-    docs/
+    <docs-root>/
       glossary/
         _index.md                   domain map: domains, how they connect, term list
         <domain>.md                 the domain's terms: meaning, purpose, relations
@@ -32,6 +32,10 @@ Every document answers one question and links to the documents that answer the o
 ADRs, RFCs, and task dirs are named `<epoch-id>-<slug>` per the `lets-decisions` naming rules, with an English kebab-case slug. Templates for every `_index.md`, the glossary domain files, and the convention files: [references/formats.md](references/formats.md).
 
 The tree is closed. Documentation lives only in these places, and each document answers exactly one row of the table below. Don't create new directories, loose .md files at the root or next to the code, or anything in a plan dir besides spec.md and plan.md. The one exception is `.gitkeep`, which keeps an empty directory in git. If a document fits no row, don't write it; ask the human. Only lets-init creates or extends the tree, and the other skills fill the places it lists.
+
+## Docs root
+
+`<docs-root>` is the folder the tree lives under: `docs` by default, or the name lets-init chose, from `--docs-dir` or from the human when `docs` was already taken. AGENTS.md records it (`docs root: <name>`); read the root from there before building any path — opening an `_index.md`, creating a plan dir, writing a link. Wherever these skills print `docs/…`, they mean `<docs-root>/…`. Only lets-init changes the root, by moving the whole tree on the human's approval; no other skill renames it or creates a second docs tree.
 
 ## Indexes
 
@@ -57,7 +61,7 @@ Don't copy text across rows; link to it. The one-line summary in an index row is
 
 ## The glossary and conventions change only with the human's approval
 
-The glossary and the conventions are rules that the team and every future agent will follow, so the agent never decides them. No skill and no subagent writes to docs/glossary/ or docs/conventions/ without the human's explicit approval of that exact change. This covers new entries, edits, renames, deletions, and the matching index rows.
+The glossary and the conventions are rules that the team and every future agent will follow, so the agent never decides them. No skill and no subagent writes to `<docs-root>/glossary/` or `<docs-root>/conventions/` without the human's explicit approval of that exact change. This covers new entries, edits, renames, deletions, and the matching index rows.
 
 1. Show the exact text (the full entry, or before and after for an edit), the file it goes into, and the evidence for it: file:line, the human's own words, or a DEC.
 2. Ask: approve, change, or reject. Several proposals can share a message, but each one is numbered and answered on its own.

@@ -13,7 +13,7 @@
     constraints, likely problems.
 
     ## Prior art
-    Related plans from docs/plans/: the path, what we reuse (decisions,
+    Related plans from <docs-root>/plans/: the path, what we reuse (decisions,
     contracts, files), and how this task differs. If none, say so and list
     the grep terms actually used, plain and code spellings.
 

@@ -1,6 +1,8 @@
 # Formats
 
-## Glossary: docs/glossary/_index.md
+`<docs-root>` in the paths below is the docs root AGENTS.md records (`docs` unless lets-init chose another name).
+
+## Glossary: <docs-root>/glossary/_index.md
 
 The domain map. Read it first: it tells you which domain file holds a term.
 
@@ -20,7 +22,7 @@ The domain map. Read it first: it tells you which domain file holds a term.
     |---|---|---|
     | [Order](orders.md#order) | Orders | one customer purchase, from cart to delivery |
 
-## Glossary: docs/glossary/<domain>.md
+## Glossary: <docs-root>/glossary/<domain>.md
 
 One file per domain. A term lives in exactly one domain; other domains link to it.
 
@@ -43,7 +45,7 @@ One file per domain. A term lives in exactly one domain; other domains link to i
 
 Leave out a field that has nothing to say, except Definition, Purpose, and Approved.
 
-## Conventions: docs/conventions/_index.md
+## Conventions: <docs-root>/conventions/_index.md
 
     # Conventions
 
@@ -53,7 +55,7 @@ Leave out a field that has nothing to say, except Definition, Purpose, and Appro
 
 The "Applies to" column is how a skill finds the rules for the files a task touches.
 
-## Conventions: docs/conventions/<area>.md
+## Conventions: <docs-root>/conventions/<area>.md
 
     # <Area> conventions
 
@@ -69,7 +71,7 @@ The "Applies to" column is how a skill finds the rules for the files a task touc
 
 A rule that binds architecture rather than how code is written belongs in an ADR; the convention links it.
 
-## Design: docs/design/_index.md
+## Design: <docs-root>/design/_index.md
 
     # Design
 
@@ -77,7 +79,7 @@ A rule that binds architecture rather than how code is written belongs in an ADR
     |---|---|---|
     | Orders | src/features/orders/**, api/orders/** | [orders.md](orders.md) |
 
-## Decisions: docs/architecture/adr/_index.md and rfcs/_index.md
+## Decisions: <docs-root>/architecture/adr/_index.md and rfcs/_index.md
 
     # ADRs
 
