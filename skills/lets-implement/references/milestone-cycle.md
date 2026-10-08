@@ -6,7 +6,7 @@ Before every milestone, write in your working notes: the files to touch; the dis
 
 ## Dispatch
 
-One plan task per implementer. A task too big to review as a single diff is split into closed parts. Build the prompt from the `lets-orchestration` dispatch template. Give each implementer the convention files whose "Applies to" covers its files, and the glossary domains its terms belong to. If the milestone changes how an area behaves, updating docs/design/<area>.md and its index row is part of that milestone's task. Glossary and convention changes are not: the implementer proposes them and the orchestrator takes them to the human.
+One plan task per implementer. A task too big to review as a single diff is split into closed parts. Build the prompt from the `lets-orchestration` dispatch template. Give each implementer the convention files whose "Applies to" covers its files, and the glossary domains its terms belong to. If the milestone changes how an area behaves, updating `<docs-root>/design/<area>.md` and its index row is part of that milestone's task. Glossary and convention changes are not: the implementer proposes them and the orchestrator takes them to the human.
 
 ## Validate, review, rework
 

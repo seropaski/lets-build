@@ -9,7 +9,7 @@ You are the orchestrator: you run the process and talk to the human. Writing, va
 
 ## 0. Load state
 
-The optional argument names the plan: a path to plan.md, a task slug under docs/plans/active/ (with or without the epoch prefix), or free text matched against plan titles. With no argument, take the plan if exactly one is READY, IN_PROGRESS, or BLOCKED. If there are several, list them and ask; if there are none, stop and ask.
+The optional argument names the plan: a path to plan.md, a task slug under `<docs-root>/plans/active/` (with or without the epoch prefix), or free text matched against plan titles. With no argument, take the plan if exactly one is READY, IN_PROGRESS, or BLOCKED. If there are several, list them and ask; if there are none, stop and ask.
 
 Read AGENTS.md, then spec.md (the goal), then plan.md (the how), then every ADR the plan links. Load `lets-doc-standards` and `lets-decisions`. The status decides what happens next:
 

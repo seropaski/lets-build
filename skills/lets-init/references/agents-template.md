@@ -16,7 +16,8 @@ Fill every `<...>` from the analysis or the interview. Keep the file short: it l
     Only commands the project defines. Drop a line the project has no command for.
 
     ## Conventions
-    Cross-cutting only; area rules live in docs/conventions/_index.md.
+    Cross-cutting only; area rules live in <docs root>/conventions/_index.md.
+    - docs root: <folder> — the lets docs tree lives here
     - imports: <alias and relative-path policy, as detected>
     - layers: <which code lives where; import boundaries>
     - shared UI: <component inventory or registry to check before writing new UI>
@@ -44,7 +45,7 @@ Fill every `<...>` from the analysis or the interview. Keep the file short: it l
 
     ## Workflow
     - lets-init: project setup (this file, the docs tree)
-    - lets-research: explore the code; write docs/design/; propose glossary and conventions
+    - lets-research: explore the code; write <docs root>/design/; propose glossary and conventions
     - lets-plan: spec.md + plan.md before code
     - lets-implement: milestone loop, progress written back to plan.md
     - lets-review: spec, plan, and ADR compliance, then code review
@@ -53,7 +54,7 @@ Fill every `<...>` from the analysis or the interview. Keep the file short: it l
 
     ## Documentation rules
     Documents link instead of duplicating: terms live in the glossary,
-    decisions in ADRs, current behavior in docs/design, task state in
+    decisions in ADRs, current behavior in <docs root>/design, task state in
     plan.md, changes in git. The docs tree is closed; nothing is written
     outside it. Each docs folder has an _index.md; keep it in step with the
     files. Use relative links. Update the source of truth, never a copy.

@@ -1,20 +1,20 @@
 # Discovery: what the project already knows
 
-Used by lets-plan and lets-research. Work top-down; each level either answers the question or sends you to the next one. At every level, start from the folder's `_index.md` and open only the files it points to. Grep is the fallback for what the index doesn't cover.
+Used by lets-plan and lets-research. Work top-down; each level either answers the question or sends you to the next one. At every level, start from the folder's `_index.md` and open only the files it points to. Grep is the fallback for what the index doesn't cover. `<docs-root>` below is the docs root AGENTS.md records; `docs` unless lets-init chose another name.
 
 ## 1. Glossary
 
-Open docs/glossary/_index.md, find the domains the request touches, and read those domain files. If the request uses a term ambiguously and the glossary has no entry for it, ask the human what it means here, then propose an entry for approval (the approval rule in SKILL.md). The glossary exists so this question gets asked once per project, not once per task.
+Open `<docs-root>/glossary/_index.md`, find the domains the request touches, and read those domain files. If the request uses a term ambiguously and the glossary has no entry for it, ask the human what it means here, then propose an entry for approval (the approval rule in SKILL.md). The glossary exists so this question gets asked once per project, not once per task.
 
 ## 2. Conventions, ADRs, RFCs, design docs
 
-- docs/conventions/_index.md: the convention files whose "Applies to" paths cover the code the task touches. Their rules bind the plan.
-- docs/architecture/adr/_index.md and rfcs/_index.md: the decisions on the task's topics. If the work would break an ADR, either comply or bring the conflict to the human, spelled out. If no ADR covers the topic, note that; the gap feeds the L3 check later.
-- docs/design/_index.md: the areas the task touches. Their design docs are required reading, because they say how the area works today.
+- `<docs-root>/conventions/_index.md`: the convention files whose "Applies to" paths cover the code the task touches. Their rules bind the plan.
+- `<docs-root>/architecture/adr/_index.md` and `rfcs/_index.md`: the decisions on the task's topics. If the work would break an ADR, either comply or bring the conflict to the human, spelled out. If no ADR covers the topic, note that; the gap feeds the L3 check later.
+- `<docs-root>/design/_index.md`: the areas the task touches. Their design docs are required reading, because they say how the area works today.
 
 ## 3. Prior art
 
-Before any new research, search docs/plans/active and docs/plans/completed for earlier work on the same problem.
+Before any new research, search `<docs-root>/plans/active` and `<docs-root>/plans/completed` for earlier work on the same problem.
 
 1. Grep the contents first. Take the nouns from the requirements (entities, UI sections, operations) and grep plan bodies case-insensitively for at least two spellings of each: the plain term and its spelling in code (routes, models, files), plus plurals. Dir names are mostly opaque slugs, so a match in the body counts as a candidate.
 2. Glob file names second, as an extra. Zero name matches proves nothing.

@@ -47,10 +47,10 @@ Pick the forge from `git remote get-url origin`: GitLab gets push options, GitHu
 
 ## 5. Close the plan
 
-Look for an IN_REVIEW plan in docs/plans/active/ whose Branch field, or failing that its slug, matches the current branch. Skip this step for "commit only", when no plan matches, or when no MR or PR was created. Otherwise offer to close the plan, and on the human's yes:
+Look for an IN_REVIEW plan in `<docs-root>/plans/active/` whose Branch field, or failing that its slug, matches the current branch. Skip this step for "commit only", when no plan matches, or when no MR or PR was created. Otherwise offer to close the plan, and on the human's yes:
 
 1. In plan.md, set Status to DONE and fill in Result: the MR or PR URL, the date, and a one-line outcome.
-2. Move the plan dir from docs/plans/active/ to docs/plans/completed/ with `git mv`, and update links elsewhere in docs/ that pointed at the old path.
+2. Move the plan dir from `<docs-root>/plans/active/` to `<docs-root>/plans/completed/` with `git mv`, and update links elsewhere in the docs tree that pointed at the old path.
 3. Commit this as `docs: close plan <slug>` and push it to the same branch with a plain `git push`. The open MR or PR picks it up; no new one is created.
 
 Design docs aren't edited here; lets-implement owns them. If one is out of date, report it.

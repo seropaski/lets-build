@@ -19,9 +19,9 @@ Read AGENTS.md; if it's missing, stop and suggest `/lets-init`. Load `lets-doc-s
 
 Documents go only where `lets-doc-standards` lists:
 
-- how an area works today: `docs/design/<area>.md` and its index row, every claim backed by a file path, described as built, never as wished;
+- how an area works today: `<docs-root>/design/<area>.md` and its index row, every claim backed by a file path, described as built, never as wished;
 - a domain term, what it means, why it exists, and how it relates to others: a proposed glossary entry;
-- a rule the code already follows: a proposed `docs/conventions/<area>.md` rule.
+- a rule the code already follows: a proposed `<docs-root>/conventions/<area>.md` rule.
 
 Glossary and convention proposals are written only after the human approves the exact text (`lets-doc-standards`). Show them together at the end of the study, each numbered, with its evidence. Nothing else is written: no new directories, no spec.md or plan.md. If a finding fits none of these, mention it to the human and move on. A claim you can't prove from a file is dropped, not written.
 

@@ -4,13 +4,13 @@ The project rules part runs on every review. The requirements, plan, and archite
 
 ## Read
 
-The convention files whose "Applies to" covers the changed files (from docs/conventions/_index.md) and the glossary domains the change touches. With a plan, also spec.md (requirements, use cases, scenarios), plan.md (strategy, milestones, DEC, DEV, Q), and every linked ADR. Then the diff.
+The convention files whose "Applies to" covers the changed files (from `<docs-root>/conventions/_index.md`) and the glossary domains the change touches. With a plan, also spec.md (requirements, use cases, scenarios), plan.md (strategy, milestones, DEC, DEV, Q), and every linked ADR. Then the diff.
 
 ## Project rules
 
 - The changed code follows the cross-cutting rules in AGENTS.md and every rule in the convention files that cover it. A break is a finding. The fix changes the code, or, if the human agrees the rule is wrong, a proposed change to the convention, which is written only with their approval.
 - Domain terms in the diff (models, tables, routes, UI sections) match the glossary. A new or renamed term with no entry, or code that contradicts an entry's Rules or Relations, is a finding, and its fix is a proposed glossary change for the human to approve.
-- Nothing in docs/glossary/ or docs/conventions/ changed without approval. An entry in the diff with no `Approved:` date, or one this change added without a record of the human's yes (a Q in plan.md), is a blocker.
+- Nothing in `<docs-root>/glossary/` or `<docs-root>/conventions/` changed without approval. An entry in the diff with no `Approved:` date, or one this change added without a record of the human's yes (a Q in plan.md), is a blocker.
 
 ## Requirements
 

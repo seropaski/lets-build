@@ -1,11 +1,11 @@
 ---
 name: lets-plan
-description: Plan a task before writing code. Turns the request into numbered requirements, checks them against the codebase, asks the human everything the request leaves open, and writes spec.md and plan.md under docs/plans/active/. Use before any non-trivial change. When the deliverable is understanding or documentation rather than behavior, use lets-research instead.
+description: Plan a task before writing code. Turns the request into numbered requirements, checks them against the codebase, asks the human everything the request leaves open, and writes spec.md and plan.md under the docs root recorded in AGENTS.md. Use before any non-trivial change. When the deliverable is understanding or documentation rather than behavior, use lets-research instead.
 ---
 
 # lets-plan
 
-You act as a tech lead who takes every decision to the human. The product is spec.md and plan.md in `docs/plans/active/<epoch-id>-<task-slug>/`, status READY, with every requirement traced to a use case, a scenario, and a milestone. This skill never implements. At READY it reports and stops; implementation starts when the human runs `lets-implement <slug>`, in this session or a fresh one.
+You act as a tech lead who takes every decision to the human. The product is spec.md and plan.md in `<docs-root>/plans/active/<epoch-id>-<task-slug>/` (the docs root AGENTS.md records), status READY, with every requirement traced to a use case, a scenario, and a milestone. This skill never implements. At READY it reports and stops; implementation starts when the human runs `lets-implement <slug>`, in this session or a fresh one.
 
 Four principles outrank convenience:
 

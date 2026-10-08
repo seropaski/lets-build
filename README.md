@@ -8,7 +8,7 @@ Six public skills: init, research, plan, implement, review, ship. Four service s
 
     npx skills add seropaski/lets-build
 
-Then run `/lets-init` once in the target repository. It analyzes the project, interviews you, and creates the AGENTS.md and docs/ tree that every other skill reads. You need git and an agent that supports skills and subagents. Claude Code reads CLAUDE.md rather than AGENTS.md, so init offers a one-line CLAUDE.md that imports it.
+Then run `/lets-init` once in the target repository. It analyzes the project, interviews you, and creates the AGENTS.md and docs/ tree that every other skill reads. If docs/ is already yours, `/lets-init --docs-dir lets-docs` puts the tree under another folder, and init asks on its own when it finds a docs/ with your files in it; the folder lands in AGENTS.md, so every skill reads it from there. You need git and an agent that supports skills and subagents. Claude Code reads CLAUDE.md rather than AGENTS.md, so init offers a one-line CLAUDE.md that imports it.
 
 ## The workflow
 
@@ -46,7 +46,7 @@ Every transition is a human decision: the agent never rolls from planning into c
       plans/active/<id>-<slug>/     spec.md + plan.md of running tasks
       plans/completed/              archived at DONE
 
-The tree is closed: documentation exists only in these places, and only lets-init extends it. Every folder except plans/ has an `_index.md` table of contents, and skills start their lookups there instead of reading every file.
+The tree is closed: documentation exists only in these places, and only lets-init extends it. Every folder except plans/ has an `_index.md` table of contents, and skills start their lookups there instead of reading every file. The root is `docs` unless init put the tree elsewhere (`--docs-dir lets-docs`, or your answer when `docs` was already taken); AGENTS.md records the folder, and re-running init with a new `--docs-dir` moves the whole tree after your yes.
 
 The glossary and the conventions are yours. An agent proposes the exact text of every entry or rule, with its evidence, and writes it only after you approve that text. Subagents can't write there at all, and review flags any change that skipped your approval.
 
