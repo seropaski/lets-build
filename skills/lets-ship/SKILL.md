@@ -37,11 +37,11 @@ If a hook rejects the commit, no commit was made. Fix the cause and commit again
 
 Run `git fetch origin`. If uncommitted changes remain, ask whether to ship them too or leave them on purpose. If nothing is ahead of the default branch, say "nothing to merge" and stop.
 
-The title follows the subject rules; with several commits, it names the task they share rather than listing them. The description is one to three sentences on what and why, in the docs language from AGENTS.md, as one paragraph with no line breaks and no commit or file lists.
+The title follows the subject rules; with several commits, it names the task they share rather than listing them. The description is built from [references/pr-template.md](references/pr-template.md) — the full form or the compressed one — in the docs language from AGENTS.md. A CONTRIBUTING.md in the project that says anything about PR or MR text wins over the template, and so does a template the project already ships.
 
-Pick the forge from `git remote get-url origin`: GitLab gets push options, GitHub gets `gh pr create`, and anything else (including a self-hosted host whose name says neither) means asking the human. Commands: [references/forge-recipes.md](references/forge-recipes.md). Show the MR or PR URL from the output.
+Pick the forge from `git remote get-url origin`: GitLab gets glab or push options, GitHub gets `gh pr create`, and anything else (including a self-hosted host whose name says neither) means asking the human. Commands: [references/forge-recipes.md](references/forge-recipes.md). Show the MR or PR URL from the output.
 
-- GitLab with an MR already open on the branch: push options only apply when an MR is created, so say so.
+- GitLab with an MR already open on the branch: neither push options nor `glab mr create` updates it. Say so, and point to the web UI or `glab mr update`.
 - `gh pr create` fails because a PR exists: offer `gh pr edit`.
 - The push is rejected: show the output. Force-pushing is not the fix.
 
