@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0](https://github.com/seropaski/lets-build/compare/v0.1.0...v0.2.0) (2026-10-09)
+
+
+### 🚀 Features
+
+* add an MR/PR description template to lets-ship ([#8](https://github.com/seropaski/lets-build/issues/8)) ([3862f9f](https://github.com/seropaski/lets-build/commit/3862f9fcce4440b2765295c74b2e48e8059d3b63))
+* make the docs tree root configurable in lets-init ([#6](https://github.com/seropaski/lets-build/issues/6)) ([ac11eff](https://github.com/seropaski/lets-build/commit/ac11eff9f8d93b9414237f9973609e955af683e2))
+
 ## 0.1.0 (2026-10-03)
 
 
