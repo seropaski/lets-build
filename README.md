@@ -1,4 +1,6 @@
-# 🏗️ Let's Build
+<div align="center">
+  <img src="assets/hero.png" alt="Let's Build — spec-driven workflow skills for AI coding agents. The work lives in the repo, not in chat memory." width="100%">
+</div>
 
 Engineering workflow skills for AI coding agents. Tasks run through living documents — spec, plan, ADR, RFC, design — stored in the repository itself. A new session resumes from the repo, not from chat memory.
 
@@ -12,18 +14,9 @@ Then run `/lets-init` once in the target repository. It analyzes the project, in
 
 ## The workflow
 
-    /lets-init       once per repo — analysis + interview → AGENTS.md, README, docs tree, glossary
-      ↓
-    /lets-plan       <task> → spec.md + plan.md, status READY
-      ↓
-    /lets-implement  milestones via subagents, progress written to plan.md
-      ↓
-    /lets-review     spec/plan/ADR compliance + five risk checks on the code
-      ↓
-    /lets-ship       commit + MR/PR (GitLab or GitHub, auto-detected)
-
-    /lets-research   any time, outside the loop — explore the code, write
-                     design docs, glossary, conventions
+<div align="center">
+  <img src="assets/workflow.png" alt="init → plan → implement → review → ship; research runs outside the loop; plan.md is the live state every session reconciles against the worktree" width="100%">
+</div>
 
 Every transition is a human decision: the agent never rolls from planning into coding, or from coding into committing. plan.md stays the live state — ticks, deviations, blockers — so any session continues where the last one stopped:
 
