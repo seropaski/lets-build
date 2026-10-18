@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/seropaski/lets-build/compare/v0.2.0...v0.2.1) (2026-10-18)
+
+
+### 📚 Documentation
+
+* add hero and workflow graphics to README ([c6250f0](https://github.com/seropaski/lets-build/commit/c6250f03cf5656fd9c865eeb23b4257898aba6b9))
+
 ## [0.2.0](https://github.com/seropaski/lets-build/compare/v0.1.0...v0.2.0) (2026-10-09)
 
 
