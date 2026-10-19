@@ -23,7 +23,7 @@ From here the plan lives only in the worktree, next to the work it describes.
 A fresh worktree carries the tracked files and nothing else. Before the first session:
 
 1. Copy the files `.worktreeinclude` lists — gitignore syntax, repository root. It doesn't exist yet? Propose a list from the `.env*` and similar the repo actually has, and write the file after the human approves it.
-2. Run the project's install command.
+2. Run the project's install — from AGENTS.md if it records one, otherwise the lockfile's package manager.
 3. Copy, never symlink. A symlinked `node_modules` or `.env` serves two worktrees at once, and the first install in either rewrites it for both.
 
 ## Sessions
