@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.3.0](https://github.com/seropaski/lets-build/compare/v0.2.1...v0.3.0) (2026-10-19)
+
+
+### 🚀 Features
+
+* run each plan in its own git worktree ([2fe50c3](https://github.com/seropaski/lets-build/commit/2fe50c3f7ba503ce90cad27467bbca1c7ea36b2a))
+* run each plan in its own git worktree ([#10](https://github.com/seropaski/lets-build/issues/10)) ([34c905e](https://github.com/seropaski/lets-build/commit/34c905ef2b9fc7521f61b2527ff5b1c2813f1f91))
+
+
+### 🐛 Bug Fixes
+
+* carry the plan into the worktree and redirect empty lookups ([9f95285](https://github.com/seropaski/lets-build/commit/9f95285df5f7b94a89a8c0e8c68a0f902641b116))
+* name the source of the worktree install command ([2b64e8d](https://github.com/seropaski/lets-build/commit/2b64e8d031a703b5234a7989cec63dc7f06437cd))
+
+
+### 📚 Documentation
+
+* rework the README into usage cards with a worktree section ([692ffd1](https://github.com/seropaski/lets-build/commit/692ffd1d7b38564e997dff0ad65cd48e6574b193))
+
 ## [0.2.1](https://github.com/seropaski/lets-build/compare/v0.2.0...v0.2.1) (2026-10-18)
 
 
