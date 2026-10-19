@@ -58,7 +58,7 @@ The glossary and the conventions are yours. An agent proposes the exact text of 
 
 Numbered items become tracked requirements. The agent explores prior plans, reusable components, and ADRs — then asks everything the request does not state, in small batches, each question with options and a recommendation. No plan reaches READY with an open question. An architectural fork becomes an RFC; you decide; an ADR records it.
 
-**Implement.** `/lets-implement orders-status-filter` — subagents write, validate, and review each milestone; the orchestrator never edits code. Progress, deviations (DEV), and new questions (Q) land in plan.md after every milestone. A blocked question flips its milestone to [!] and stops that thread while others continue. Re-run in any session: the plan is reconciled against the worktree and work resumes. Ends IN_REVIEW.
+**Implement.** `/lets-implement orders-status-filter` — subagents write, validate, and review each milestone; the orchestrator never edits code. Progress, deviations (DEV), and new questions (Q) land in plan.md after every milestone. A blocked question flips its milestone to [!] and stops that thread while others continue. Re-run in any session: the plan is reconciled against the worktree and work resumes. A plan can run in a worktree of its own: implement offers `../<repo>-<slug>` on the plan's branch when the checkout is busy, and ship offers to remove it once the plan closes. Ends IN_REVIEW.
 
 **Review.** `/lets-review` reviews uncommitted changes; `staged`, `branch main`, or a PR number work too. Compliance comes first (spec, plan, ADRs, design docs), then five risk checks on the code: security, correctness, data and rollout, performance, and leftovers (copied or orphaned logic). Big changes get a read-only subagent per check. Style is never flagged. If the branch has no plan, the review says so up front and checks only the code. The full review comes first; then it asks which findings to fix and how (fix here, investigate first, or rework through lets-implement), and nothing changes until you answer.
 
@@ -67,6 +67,7 @@ Numbered items become tracked requirements. The agent explores prior plans, reus
 ## What this buys you
 
 - **Sessions are disposable.** State lives in plan.md and git, so a new session, agent, or human picks it up.
+- **A second task never waits for the first.** Each plan can run in its own worktree (`../<repo>-<slug>` on the plan's branch), so neither task disturbs the other's checkout.
 - **Memory survives turnover.** ADRs keep the why, design/ the current state, the glossary the vocabulary, RFCs the rejected paths.
 
 ## Skills reference

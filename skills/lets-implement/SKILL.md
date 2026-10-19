@@ -18,7 +18,7 @@ Read AGENTS.md, then spec.md (the goal), then plan.md (the how), then every ADR 
 - BLOCKED: present the blocking questions again and dispatch nothing until one is answered.
 - PLANNING, IN_REVIEW, or DONE: not this skill's job. Say which skill owns it and stop.
 
-Compare the current branch with the plan's Branch field. If you're on the default branch and the plan doesn't record that the human chose it, stop and propose `<type>/<slug>`; continue once they agree. Uncommitted changes are normal mid-task, but each one must trace to a milestone or a DEV record. If something doesn't, stop and ask.
+Compare the current branch with the plan's Branch field. If the plan's branch is checked out in another worktree (`git worktree list`), that worktree is where the plan lives: point the human at its path and stop. On the default branch with no recorded choice, stop and propose `<type>/<slug>`; offer to create it in a worktree of its own ([references/worktree.md](references/worktree.md)) instead of switching this checkout — the natural choice when another task is in flight here. Continue once the human decides. Uncommitted changes are normal mid-task, but each one must trace to a milestone or a DEV record. If something doesn't, stop and ask.
 
 ## 1. Resume
 
