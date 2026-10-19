@@ -9,7 +9,7 @@ You are the orchestrator: you run the process and talk to the human. Writing, va
 
 ## 0. Load state
 
-The optional argument names the plan: a path to plan.md, a task slug under `<docs-root>/plans/active/` (with or without the epoch prefix), or free text matched against plan titles. With no argument, take the plan if exactly one is READY, IN_PROGRESS, or BLOCKED. If there are several, list them and ask; if there are none, stop and ask.
+The optional argument names the plan: a path to plan.md, a task slug under `<docs-root>/plans/active/` (with or without the epoch prefix), or free text matched against plan titles. With no argument, take the plan if exactly one is READY, IN_PROGRESS, or BLOCKED. If there are several, list them and ask; if there are none, or the named plan matches nothing here, check `git worktree list` first: a plan that runs in a worktree lives there, not in this checkout. Point the human at the matching worktree; ask only when nothing turns up.
 
 Read AGENTS.md, then spec.md (the goal), then plan.md (the how), then every ADR the plan links. Load `lets-doc-standards` and `lets-decisions`. The status decides what happens next:
 
@@ -18,7 +18,7 @@ Read AGENTS.md, then spec.md (the goal), then plan.md (the how), then every ADR 
 - BLOCKED: present the blocking questions again and dispatch nothing until one is answered.
 - PLANNING, IN_REVIEW, or DONE: not this skill's job. Say which skill owns it and stop.
 
-Compare the current branch with the plan's Branch field. If you're on the default branch and the plan doesn't record that the human chose it, stop and propose `<type>/<slug>`; continue once they agree. Uncommitted changes are normal mid-task, but each one must trace to a milestone or a DEV record. If something doesn't, stop and ask.
+Compare the current branch with the plan's Branch field. If the plan's branch is checked out in another worktree (`git worktree list`), that worktree is where the plan lives: point the human at its path and stop. On the default branch with no recorded choice, stop and propose `<type>/<slug>`; offer to create it in a worktree of its own ([references/worktree.md](references/worktree.md)) instead of switching this checkout — the natural choice when another task is in flight here. Continue once the human decides. Uncommitted changes are normal mid-task, but each one must trace to a milestone or a DEV record. If something doesn't, stop and ask.
 
 ## 1. Resume
 

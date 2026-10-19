@@ -53,4 +53,6 @@ Look for an IN_REVIEW plan in `<docs-root>/plans/active/` whose Branch field, or
 2. Move the plan dir from `<docs-root>/plans/active/` to `<docs-root>/plans/completed/` with `git mv`, and update links elsewhere in the docs tree that pointed at the old path.
 3. Commit this as `docs: close plan <slug>` and push it to the same branch with a plain `git push`. The open MR or PR picks it up; no new one is created.
 
+If this session runs in a linked worktree, offer to remove it once the plan is closed: `git worktree remove <path>` from the main checkout, after this session ends. A refusal means the worktree is unclean — show what's left and let the human decide; `--force` discards it and is never yours to choose. The branch survives removal, and a review fix reopens the worktree (`git worktree add <path> <branch>`).
+
 Design docs aren't edited here; lets-implement owns them. If one is out of date, report it.
