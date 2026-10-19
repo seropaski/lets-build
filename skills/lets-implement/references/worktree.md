@@ -11,6 +11,13 @@ Offer a worktree whenever a plan is about to start and this checkout is busy wit
 
 The branch already exists (the plan records it): `git worktree add ../<repo>-<slug> <branch>`. With no remote, base the new branch on the local default branch. A sibling directory, never a folder inside the repository: nothing to gitignore, and the main checkout stays the main checkout.
 
+Then move the plan across. It is untracked at this point, so a plain move changes nothing in git; if it was committed on the base branch, the fresh worktree already has it and there is nothing to move.
+
+    mkdir -p ../<repo>-<slug>/<docs-root>/plans/active
+    mv <docs-root>/plans/active/<id>-<slug> ../<repo>-<slug>/<docs-root>/plans/active/
+
+From here the plan lives only in the worktree, next to the work it describes.
+
 ## Bootstrap
 
 A fresh worktree carries the tracked files and nothing else. Before the first session:
